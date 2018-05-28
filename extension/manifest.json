@@ -1,0 +1,35 @@
+{
+    "name": "WebCorrector Ext.",
+    "version": "1.1.0",
+    "description": "Make the web better!",
+
+    "manifest_version": 2,
+
+    "icons": {
+        "48": "icon.png"
+    },
+
+    "browser_action": {
+        "default_popup": "index.html",
+        "default_icon": "icon.png"
+    },
+
+    "content_scripts": [
+        {
+            "matches": [ "http://*/*", "https://*/*" ],
+            "js": [ "loader.js" ],
+            "run_at": "document_end"
+        }
+    ],
+
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+
+    "permissions": [
+        "storage",
+        "unlimitedStorage",
+        "tabs"
+    ]
+}

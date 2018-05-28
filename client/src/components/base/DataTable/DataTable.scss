@@ -1,0 +1,180 @@
+$highlight-bg: #f0f5fb;
+$highlight-text: #000;
+
+$text: #333;
+$border: rgb(240, 240, 240);
+
+$header: #3e4d7a;
+$header-border: rgb(230, 230, 230);
+
+.data-table {
+  width: 100%;
+  cursor: default;
+  background: #fff;
+}
+
+.data-table__header-cell_can-sort {
+  user-select: none;
+}
+
+// Столбец отсортирован по возрастанию
+.data-table_to-top {
+  .data-table__header-cell_sort-target.data-table__header-cell_can-sort::after {
+    content: "▲";
+    color: $header;
+  }
+}
+
+// Столбец отсортирован по убыванию
+.data-table_to-bottom {
+  .data-table__header-cell_sort-target.data-table__header-cell_can-sort::after {
+    content: "▼";
+    color: $header;
+  }
+}
+
+// Подцветка при наведении на строку
+.data-table_hover-highlight:not(.data-table_editing) .data-table__row:hover {
+  background: $highlight-bg;
+  .data-table__cell{
+    color: $highlight-text;
+  }
+}
+
+// Редактируемые таблицы
+.data-table_editable {
+  .data-table__row:hover {
+    .data-table__cell {
+      border-bottom: 1px solid $header-border;
+    }
+
+    .data-table__row-options {
+      opacity: 1;
+    }
+  }
+}
+
+// Режим редактирования строки
+.data-table_editing {
+  .data-table__editing-target {
+    background: $highlight-bg;
+
+    .data-table__cell{
+      color: $highlight-text;
+    }
+
+    .data-table__row-options {
+      display: flex;
+    }
+  }
+
+  .data-table__row-options {
+    display: none;
+  }
+}
+
+// Строка заголовка таблицы
+.data-table__header-row {
+  display: flex;
+}
+
+// Строка с данными
+.data-table__row {
+  position: relative;
+  transition: .3s;
+  display: flex;
+}
+
+// Панель с действиями над строкой
+.data-table__row-options {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  transition: .5s;
+
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+
+  width: 60px;
+  height: 30px;
+
+  border: 1px solid $header-border;
+  border-radius: 15px 0 0 0;
+  background: #fff;
+
+  font-size: 14px;
+  opacity: 0;
+  user-select: none;
+
+  .data-table__remove:hover,
+  .data-table__edit:hover,
+  .data-table__save:hover,
+  .data-table__rollback:hover {
+    transform: scale(1.2);
+  }
+
+  .data-table__remove:active,
+  .data-table__edit:active,
+  .data-table__save:active,
+  .data-table__rollback:active {
+    transform: scale(.9);
+  }
+
+  // Иконка редактировать строку
+  .data-table__edit {
+    color: rgb(48, 74, 187);
+  }
+
+  // Иконка удалить строку
+  .data-table__remove {
+    color: rgb(211, 36, 36);
+  }
+
+  // Иконка сохранить изменения
+  .data-table__save {
+    color: #1842a5;
+    font-size: 1.2em;
+  }
+
+  // Иконка отменить изменения
+  .data-table__rollback {
+    color: rgb(211, 36, 36);
+  }
+}
+
+// Ячейка таблицы
+.data-table__cell {
+  padding: 5px 5px;
+  border-bottom: 1px solid $border;
+  color: $text;
+  overflow: hidden;
+  outline: none;
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+// Ячейка заголовка таблицы
+.data-table__header-cell {
+  padding: 5px 8px;
+  
+  border-bottom: 1px solid $header-border;
+
+  color: $header;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+// Сообщение о пустой таблице
+.data-table__empty-table-message {
+  padding: 5px;
+  text-align: center;
+  color: $text;
+}
