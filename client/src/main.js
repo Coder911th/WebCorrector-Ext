@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import './ChromeStorageEmulator.js';
 import Vue from 'vue';
 import App from './App.vue';
 import {addSetStateMixin, addActionMixin} from 'JavaScript/VuexHelpers';

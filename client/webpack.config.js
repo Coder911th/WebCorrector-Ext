@@ -83,17 +83,21 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: process.env.NODE_ENV === 'production'
+          ? '"production"'
+          : '"development"'
+      }
+    })
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = ''; //'#source-map';
+  module.exports.devtool = '';
   module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
       compress: {
