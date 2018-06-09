@@ -22,7 +22,7 @@ requireFilter.keys().forEach(fileName => {
 
 // Подключаем все пользовательские директивы из directives
 let requireDirective = require.context('./directives');
-requireDirective.keys().forEach(fileName =>{
+requireDirective.keys().forEach(fileName => {
   let directiveName = fileName
     .replace(/^.+\//, '')
     .replace(/\.\w+$/, '');
