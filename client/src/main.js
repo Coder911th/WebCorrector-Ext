@@ -61,4 +61,6 @@ addActionMixin();
 })();
 
 // Блокируем вызов контекстного меню
-document.addEventListener('contextmenu', ev => ev.preventDefault());
+if (process.env.NODE_ENV != 'development') {
+  document.addEventListener('contextmenu', ev => ev.preventDefault());
+}
