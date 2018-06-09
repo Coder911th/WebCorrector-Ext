@@ -6,7 +6,7 @@ function initStorage(details){
 	// Инициализируем хранилище скриптов
 	chrome.storage.local.set({
 		extension: true,
-		version: 'v1.1.0',
+		version: 'v1.2.0 dev',
 		nextSecurityKey: 1,
 		scripts: [],
 		libs: [],

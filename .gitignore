@@ -1,6 +1,6 @@
-client/dist/*
-extension/dist/*
-client/node_modules/*
+client/dist
+extension/dist
+client/node_modules
 
 # Logs
 logs
