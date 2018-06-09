@@ -1,6 +1,7 @@
 client/dist
 extension/dist
 client/node_modules
+.vscode
 
 # Logs
 logs

@@ -1,3 +1,18 @@
+// Словарь
+var EN = {
+  'При выполнении скрипта': 'During the execution of the script',
+  'произошла ошибка': 'an error occurred',
+  'Произошла ошибка при парсинге скрипта': 'An error occurred while parsing the script'
+};
+
+function getTranslate(lang, phrase) {
+  return lang == 'EN'
+    ? EN[phrase]
+      ? EN[phrase]
+      : phrase
+    : phrase;
+}
+
 // Список названий библиотек, которые либо уже загружены, либо ожидают загрузки
 var loadList = [];
 
@@ -37,7 +52,7 @@ function addLibToLoadList(name) {
   return url;
 }
 
-function loadScript(url, callback, code, scriptName) {
+function loadScript(url, callback, code, scriptName, lang) {
   var element = document.createElement('script');
   element.async = false;
 
@@ -52,13 +67,13 @@ function loadScript(url, callback, code, scriptName) {
       'try {' + '\n\n' + 
         code + '\n\n' +
       '} catch (error) {' + '\n' +
-      '  console.error(\'[WebCorrector Ext] During the execution of the script "' + scriptName.replace("'", "\\'") + '" an error occurred!\');' + '\n' +
+      '  console.error(\'[WebCorrector Ext] ' + getTranslate(lang, 'При выполнении скрипта') + ' "' + scriptName.replace("'", "\\'") + '" ' + getTranslate(lang, 'произошла ошибка') + '!\');' + '\n' +
       '  console.error(error);' + '\n' +
       '}';
     try {
       eval('if (false) {' + injectedCode + '}');
     } catch (error) {
-      console.error('[WebCorrector]`An error occurred while parsing the script "' + scriptName + '"!');
+      console.error('[WebCorrector] ' + getTranslate(lang, 'Произошла ошибка при парсинге скрипта') + ' "' + scriptName + '"!');
       console.error(error);
       return;
     }
@@ -105,7 +120,7 @@ function loader(storage) {
     // Все библиотеки загрузились, начинаем выполнять скрипты
     if (--leftLoad < 1) {
       queueScripts.forEach(function(script) {
-        loadScript(null, null, script.code, script.name);
+        loadScript(null, null, script.code, script.name, storage.lang);
       });
     }
   }
@@ -119,7 +134,7 @@ function loader(storage) {
 
   // Подключаем библиотеки
   loadList.forEach(function(url) {
-    loadScript(url, onLibsLoaded);
+    loadScript(url, onLibsLoaded, null, null, storage.lang);
   });
 }
 
@@ -132,7 +147,7 @@ chrome.runtime.onMessage.addListener(function(message) {
       var name = message.data;
 
       // Загружаем список скриптов из хранилища расширений
-      chrome.storage.local.get(['scripts', 'libs'], function(storage) {
+      chrome.storage.local.get(['scripts', 'libs', 'lang'], function(storage) {
         var scripts = storage.scripts;
 
         // Обновляем список библиотек расширения
@@ -154,7 +169,7 @@ chrome.runtime.onMessage.addListener(function(message) {
 
                   // Если все библиотеки загружены, то выполняем сам скрипт
                   if (--amount < 1) {  
-                    loadScript(null, null, script.code, script.name);
+                    loadScript(null, null, script.code, script.name, storage.lang);
                   }
                 });
               }
@@ -163,7 +178,7 @@ chrome.runtime.onMessage.addListener(function(message) {
             // Если все зависимости скрипта уже загружены на страницу
             // Выполняем сам скрипт
             if (!waitingForLoading) {
-              loadScript(null, null, script.code, script.name);
+              loadScript(null, null, script.code, script.name, storage.lang);
             }
           }
         });
