@@ -63,7 +63,7 @@ $text: #000;
        url(Assets/fonts/web_icon/web_icon.woff2) format('woff2'),
        url(Assets/fonts/web_icon/web_icon.woff) format('woff'),
        url(Assets/fonts/web_icon/web_icon.ttf) format('truetype'),
-       url(Assets/fonts/web_icon/web_icon.svg#web_corrector_font) format('svg');
+       url(Assets/fonts/web_icon/web_icon.svg#web_icon) format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -89,12 +89,11 @@ $text: #000;
   -moz-osx-font-smoothing: grayscale;
  }
  
+.icon-pencil:before { content: '\e800'; }
 .icon-forward:before { content: '\e801'; }
 .icon-floppy:before { content: '\e802'; }
-.icon-cancel:before { content: '\e803'; }
-.icon-cancel-1:before { content: '\e804'; }
-.icon-pencil:before { content: '\e805'; }
-.icon-trash-empty:before { content: '\e806'; }
+.icon-trash-empty:before { content: '\e803'; }
+.icon-play:before { content: '\e804'; }
 .icon-help:before { content: '\f128'; }
 
 body {

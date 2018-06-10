@@ -65,7 +65,8 @@ let EN = {
   'Редактировать': 'Edit',
   'Удалить': 'Remove',
   'Сохранить': 'Save',
-  'Отмена': 'Cancel'
+  'Отмена': 'Cancel',
+  '<div>Перед выполнением скрипта необходимо сохранить изменения.</div><div>Сохранить и продолжить?</div>': '<div>Before executing the script, you must save the changes.</div><div>Save and continue?</div>'
 };
 
 // Выносим функцию локализации в глобалью область

@@ -1,7 +1,7 @@
 /*
   Для работы требуется иконочный шрифт с определенными классами:
   > icon-pencil
-  > icon-cancel
+  > icon-trash-empty
   > icon-floppy
   > icon-forward
 

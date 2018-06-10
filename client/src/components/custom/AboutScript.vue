@@ -47,6 +47,15 @@
             <div class="about-script__menu-right">
 
               <IconButton
+                ref="play"
+                class="about-script__play-button"
+                icon="icon-play"
+                color="#424442"
+                size="1.1em"
+                @click="onPlay"
+              />
+
+              <IconButton
                 ref="back"
                 icon="icon-forward"
                 color="rgb(211, 36, 36)"
@@ -240,7 +249,7 @@ export default {
     // Обработчик дискетки (Сохранить)
     async onSave() {
       if (!this.validate()) {
-        return;
+        return false;
       }
 
       let after = {
@@ -270,6 +279,7 @@ export default {
           }).mountToDocument()
         }
       }
+      return true;
     },
 
     // Обработчик крестика (Удалить)
@@ -283,12 +293,43 @@ export default {
       }
     },
 
+    async onPlay() {
+      let payload = {
+        before: this.script,
+        after: {
+          active: this.scriptActive,
+          name: this.scriptName,
+          sites: this.scriptSites,
+          libs: this.scriptLibs,
+          code: this.scriptCode
+        }
+      };
+
+      if (await this.action('wasChanges', payload)) {
+        if (await Popup.confirm(null, lc('<div>Перед выполнением скрипта необходимо сохранить изменения.</div><div>Сохранить и продолжить?</div>'))) {
+          if (!await this.onSave())
+            return;
+        } else {
+          return;
+        }
+      }
+
+      chrome.runtime.sendMessage({
+        type: 'execScript',
+        data: this.script.name
+      });
+    },
+
     keyUpHandler(ev) {
       if (!this.script || this.$refs.editor.fullscreen) {
         return;
       }
       
       switch (ev.keyCode) {
+        case 116: /* F5 */
+          this.$refs.play.press();
+          this.onPlay();
+          break;
         case 27: /* Escape */
           this.$refs.back.press();
           this.onBack();
@@ -300,13 +341,21 @@ export default {
       }
       
       ev.preventDefault();
+    },
+
+    keyDownHandler(ev) {
+      if ([27, 116].indexOf(ev.keyCode) != -1) {
+        ev.preventDefault();
+      }
     }
   },
   mounted() {
     document.body.addEventListener('keyup', this.keyUpHandler);
+    document.body.addEventListener('keydown', this.keyDownHandler);
   },
   destroyed() {
     document.body.removeEventListener('keyup', this.keyUpHandler);
+    document.body.addEventListener('keydown', this.keyDownHandler);
   }
 };
 </script>
@@ -392,6 +441,10 @@ export default {
 
 .about-script__remove-button {
   margin-left: 10px;
+}
+
+.about-script__play-button {
+  margin-right: 10px;
 }
 
 .about-script__table {
