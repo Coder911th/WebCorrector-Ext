@@ -4,9 +4,13 @@
   > icon-cancel
   > icon-floppy
   > icon-forward
+
+  Требует компонент - Tooltip
+  Требует скрипт для экранирования HTML - escapeHTML(text)
 */
 
 import Vue from 'vue';
+import {escapeHTML} from 'JavaScript/escape.js';
 
 export default {
   name: 'DataTable',
@@ -139,7 +143,7 @@ export default {
         // Выводим сообщение об ошибке
         new Vue.options.components.Tooltip({
           propsData: {
-            text: errorMessage,
+            text: escapeHTML(errorMessage),
             element: ev.target.parentNode,
             borderColor: '#bb0000'
           }
@@ -214,7 +218,7 @@ export default {
         ? null
         : this.isNoWrapCell(row, col)
           ? row[col.field].length >= +col.tooltip
-            ? row[col.field]
+            ? escapeHTML(row[col.field])
             : null
           : null;
     }

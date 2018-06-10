@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import {vuexStates} from 'JavaScript/VuexHelpers';
 import Popup from 'JavaScript/PopupManager';
 import {getCurrentUrl} from '../javascript/BrowserExtensionHelpers';
+import {escapeHTML} from 'JavaScript/escape.js'
 
 Vue.use(Vuex);
 
@@ -54,7 +55,7 @@ async function getStore() {
       'libAlias',
   
       // Url библиотеки в настройках (поле ввода)
-      'libUrl',
+      'libURL',
       
       /*** Поля редактируемого скрипта ***/
       'scriptActive',
@@ -116,7 +117,7 @@ async function getStore() {
         // Проверяем уникальность названия скрипта
         let isNotUniqueName = scripts.some(script => script.securityKey != before.securityKey && script.name == after.name);
         if (isNotUniqueName) {
-          Popup.alert('Придумайте уникальное название', `Название скрипта "${after.name}" уже есть в базе!`);
+          Popup.alert('Придумайте уникальное название', `Название скрипта "${escapeHTML(after.name)}" уже есть в базе!`);
           return false;
         }
   

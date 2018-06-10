@@ -112,6 +112,7 @@ import Editor from '@/Editor';
 import Popup from 'JavaScript/PopupManager';
 import Validation from 'Mixins/Validation';
 import Validators from 'JavaScript/Validators';
+import {escapeHTML} from 'JavaScript/escape.js';
 
 export default {
   name: 'AboutScript',
@@ -244,7 +245,7 @@ export default {
         if (after.securityKey) {
           new Vue.options.components.Tooltip({
             propsData: {
-              text: (isNewScript ? lc('Скрипт успешно создан!') : lc('Сохранение прошло успешно!')) + `<br>${lc('Новый ключ безопасности')}: <b>${after.securityKey}</b>`,
+              text: (isNewScript ? lc('Скрипт успешно создан!') : lc('Сохранение прошло успешно!')) + `<br>${lc('Новый ключ безопасности')}: <b>${escapeHTML(after.securityKey)}</b>`,
               element: this.$refs.save,
               hideAfter: 3000,
               borderColor: 'rgb(0, 100, 0)'
@@ -261,7 +262,7 @@ export default {
 
         // Скрываем окно редактирования скрипта
         this.action('hideScriptInfo');
-        Popup.alert(null, `${lc('Скрипт')} <b>${this.scriptName}</b> ${lc('успешно удалён')}!`);
+        Popup.alert(null, `${lc('Скрипт')} <b>${escapeHTML(this.scriptName)}</b> ${lc('успешно удалён')}!`);
       }
     }
   }

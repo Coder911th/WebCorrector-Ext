@@ -9,12 +9,12 @@
 
       <div
         class="script-info-list-item__name"
-        v-tooltip="script.name.length > 20 ? script.name : ''"
+        v-tooltip="script.name.length > 20 ? escapeHTML(script.name) : ''"
       >{{script.name}}</div>
 
       <div
         class="script-info-list-item__sites"
-        v-tooltip="script.sites.length > 20 ? script.sites : ''"
+        v-tooltip="script.sites.length > 20 ? escapeHTML(script.sites) : ''"
       >{{script.sites}}</div>
 
     </div>
@@ -29,6 +29,7 @@
 
 <script>
 import Vue from 'vue';
+import {escapeHTML} from 'JavaScript/escape.js';
 
 export default {
   name: 'ScriptInfoListItem',
@@ -52,6 +53,9 @@ export default {
         }
       }).show();
     }
+  },
+  methods: {
+    escapeHTML
   }
 }
 </script>

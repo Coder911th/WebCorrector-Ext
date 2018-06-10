@@ -64,6 +64,7 @@ import {vModel} from 'JavaScript/VuexHelpers';
 import Validation from 'Mixins/Validation';
 import Validators from 'JavaScript/Validators';
 import Popup from 'JavaScript/PopupManager';
+import {escapeHTML} from 'JavaScript/escape.js';
 
 export default {
   name: 'Settings',
@@ -77,7 +78,7 @@ export default {
         target => {
           let alias = this.libAlias.trim();
           if (this.libs.some(lib => lib.alias == alias))
-            return `${lc('Псевдоним')} "${alias}" ${lc('уже присутствует в таблице')}!`;
+            return `${lc('Псевдоним')} "${escapeHTML(alias)}" ${lc('уже присутствует в таблице')}!`;
           return true;
         }
       ],
@@ -150,7 +151,7 @@ export default {
       let libUser = scripts.find(script => script.libs.some(lib => lib == libAlias));
       // Проверяем зависимые скрипты
       if (libUser) {
-        return `${lc('Данная библиотека используется в скрипте под названием')} <b>${libUser.name}</b>`;
+        return `${lc('Данная библиотека используется в скрипте под названием')} <b>${escapeHTML(libUser.name)}</b>`;
       }
       return true;
     },
