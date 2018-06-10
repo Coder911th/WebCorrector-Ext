@@ -120,10 +120,10 @@ export default {
     }; 
     
     this.editor = CodeMirror(this.$refs.editor, editorConfig);
-    document.addEventListener('keydown', this.closeEditorHandler);
+    document.addEventListener('keyup', this.closeEditorHandler);
   },
   destroyed() {
-    document.removeEventListener('keydown', this.closeEditorHandler);
+    document.removeEventListener('keyup', this.closeEditorHandler);
   }
 }
 </script>

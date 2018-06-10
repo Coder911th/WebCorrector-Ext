@@ -84,7 +84,10 @@
             </div>
 
             <div class="row">
-              <Editor v-model="scriptCode"/>
+              <Editor
+                ref="editor"
+                v-model="scriptCode"
+              />
               <QuestionMark
                 :text="'<b>Редактор кода</b><div style=&quot;margin-bottom: 5px&quot;>Нажмите ESC, чтобы выйти из режима редактирования.</div><div>Ctrl+Space - автодополнение.</div>'|lc"
               />
@@ -281,7 +284,7 @@ export default {
     },
 
     keyUpHandler(ev) {
-      if (!this.script) {
+      if (!this.script || this.$refs.editor.fullscreen) {
         return;
       }
       
