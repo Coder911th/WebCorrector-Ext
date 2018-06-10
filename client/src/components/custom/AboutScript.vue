@@ -82,7 +82,11 @@
 
           </div>
 
-          <Spoiler class="about-script__line" :caption="'Подключаемые библиотеки'|lc" :initOpen="isOpenSpoiler">
+          <Spoiler
+            class="about-script__line"
+            :caption="'Подключаемые библиотеки'|lc"
+            :initOpen="isOpenSpoiler"
+            @toggle="setState('isOpenSpoiler', !isOpenSpoiler)">
             <DataTable
               class="about-script__table"
               v-model="libs"
