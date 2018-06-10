@@ -28,7 +28,7 @@ export default {
     scripts() {
       if (this.isResolvedThisUrl) {
         return this.$store.state.scripts.filter(script =>
-          new RegExp(script.sites, 'i').test(this.currentUrl)
+          script.sites && new RegExp(script.sites, 'i').test(this.currentUrl)
         );
       } else {
         return [];

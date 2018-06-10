@@ -59,7 +59,7 @@ let EN = {
   'Да': 'Yes',
   'Нет': 'No',
   'Это поле обязательно для заполнения!': 'This field is required!',
-  'Регулярное выражение, определяющее сайты, на которых будет срабатывать данный скрипт.': 'A regular expression that defines the sites on which this script will fire.',
+  '<div>Регулярное выражение, определяющее сайты, на которых будет автоматически срабатывать данный скрипт.</div><div style="margin-top: 5px">Пустое поле означает невозможность автоматически подгружать данный скрипт на сайты. Только вручную.</div>': '<div>A regular expression that defines the sites on which this script will fire automatically.</div><div style="margin-top: 5px">An empty field indicates the inability to automatically load this script to sites. Only manually.</div>',
   'Состояние:': 'Status:',
   'В целях безопасности данное расширение работает только на сайтах, работающих по протоколам http/https!': 'For security reasons, this extension works only on sites that use the http/https protocols!',
   'Редактировать': 'Edit',

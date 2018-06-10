@@ -54,13 +54,12 @@
           
           <div class="about-script__label">URL<QuestionMark
               class="about-script__url-tooltip"
-              :text="'Регулярное выражение, определяющее сайты, на которых будет срабатывать данный скрипт.'|lc"
+              :text='`<div>Регулярное выражение, определяющее сайты, на которых будет автоматически срабатывать данный скрипт.</div><div style="margin-top: 5px">Пустое поле означает невозможность автоматически подгружать данный скрипт на сайты. Только вручную.</div>`|lc'
             />
           </div>
           <TextBox
             class="about-script__url"
             v-model="scriptSites"
-            :validators="[required('value')]"
           />
           
           <div class="about-script__editor-line">

@@ -105,7 +105,7 @@ function loader(storage) {
     }
 
     // Скрипт не нацелен на данный сайт
-    if (!new RegExp(script.sites).test(location.href)) {
+    if (!script.sites || !new RegExp(script.sites).test(location.href)) {
       return;
     }
 

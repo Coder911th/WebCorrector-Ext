@@ -69,8 +69,9 @@ export default {
     // Отфильтрованный список
     filteredList() {
       return this.items.filter(script =>
+        !this.filterField ||
         this.filterFlags.byName && script.name.toUpperCase().indexOf(this.filterField.toUpperCase()) > -1 ||
-        this.filterFlags.bySite && new RegExp(script.sites, 'i').test(this.filterField) ||
+        this.filterFlags.bySite && script.sites && new RegExp(script.sites, 'i').test(this.filterField) ||
         this.filterFlags.bySecurityKey && script.securityKey.toString() === this.filterField
       );
     },

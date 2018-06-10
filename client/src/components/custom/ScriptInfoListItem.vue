@@ -1,7 +1,13 @@
 <!-- Элемент списка скриптов -->
 <template>
   <div
-    :class="['script-info-list-item', {disabled: !script.active}]"
+    :class="[
+      'script-info-list-item',
+      {
+        disabled: script.sites && !script.active,
+        'without-target': !script.sites
+      }
+    ]"
     @click="action('showScriptInfo', script);"
     @contextmenu.prevent="showContextMenu"
   >
@@ -84,6 +90,10 @@ export default {
 
   &.disabled::before {
     background: radial-gradient(circle closest-side at 8px, rgb(105, 18, 25), transparent 6px);
+  }
+
+  &.without-target::before {
+    background: radial-gradient(circle closest-side at 8px, rgb(143, 129, 3), transparent 6px);
   }
 }
 
