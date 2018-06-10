@@ -34,7 +34,7 @@
         />
         <div class="settings__label">{{'URL библиотеки'|lc}}</div>
         <TextBox
-          v-model="libUrl"
+          v-model="libURL"
           class="settings__text-box"
           :validators="urlValidators"
         />
@@ -89,7 +89,7 @@ export default {
   computed: {
     ...vModel([
       'libAlias',
-      'libUrl',
+      'libURL',
       'libs',
       'extension',
       'lang'
@@ -120,14 +120,14 @@ export default {
         // Добавляем библиотеку в хранилище
         this.libs.push({
           alias: this.libAlias.trim(),
-          url: this.libUrl.trim()
+          url: this.libURL.trim()
         });
 
         // Вызываем мутацию
         this.libs = this.libs;
 
         this.libAlias = '';
-        this.libUrl = '';
+        this.libURL = '';
         new Vue.options.components.Tooltip({
           propsData: {
             text: lc('Библиотека успешно добавлена'),
@@ -158,11 +158,11 @@ export default {
     // Обработчик сохранения библиотеки
     async onSaveLib(row, rowIndex) {
       let newLibAlias = row.children[1].textContent;
-      let newLibUrl = row.children[2].textContent;
+      let newLibRUL = row.children[2].textContent;
       let scripts = this.$store.state.scripts;
       let oldLib = this.$store.state.libs[rowIndex];
 
-      if (oldLib.url != newLibUrl) {
+      if (oldLib.url != newLibURL) {
 
         // Массив скриптов, зависящих от измененной библиотеки
         let needUpdateSK = scripts.filter(script => script.libs.some(lib => lib == oldLib.alias));
