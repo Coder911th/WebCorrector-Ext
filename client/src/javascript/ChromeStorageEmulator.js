@@ -73,7 +73,7 @@ if (process.env.NODE_ENV == 'development') {
     tabs: {
       // Запрос активной вклаки
       query(conf, callback) {
-        callback([{url: 'http://example.com'}]);
+        callback([{url: 'extension://example.com'}]);
       }
     }
   };
