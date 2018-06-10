@@ -5,8 +5,10 @@
   > icon-floppy
   > icon-forward
 
-  Требует компонент - Tooltip
-  Требует скрипт для экранирования HTML - escapeHTML(text)
+  Требует:
+    Компоненты - Tooltip, IconButton
+    Директивы - v-tooltip
+    Скрипты - escapeHTML(text)
 */
 
 import Vue from 'vue';

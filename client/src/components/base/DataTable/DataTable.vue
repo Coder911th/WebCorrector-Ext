@@ -45,27 +45,35 @@
           :style="{ width: onlyRemove ? '30px' : null }" 
         >
           <!-- Редактирование -->
-          <div
+          <IconButton
             v-if="!editing && !onlyRemove"
-            class="data-table__edit icon-pencil"
+            icon="icon-pencil"
+            color="rgb(48, 74, 187)"
+            size="1.1em"
             @click="edit"
           />
           <!-- Удаление -->
-          <div
+          <IconButton
             v-if="!editing"
-            class="data-table__remove icon-trash-empty"
+            icon="icon-trash-empty"
+            color="rgb(211, 36, 36)"
+            size="1.1em"
             @click="remove"
           />
           <!-- Сохранение -->
-          <div
+          <IconButton
             v-if="editing"
-            class="data-table__save icon-floppy"
+            icon="icon-floppy"
+            color="#1842a5"
+            size="1.32em"
             @click="save"
           />
           <!-- Отмена -->
-          <div
+          <IconButton
             v-if="editing"
-            class="data-table__rollback icon-forward"
+            icon="icon-forward"
+            color="rgb(211, 36, 36)"
+            size="1.1em"
             @click="rollback"
           />
         </div>

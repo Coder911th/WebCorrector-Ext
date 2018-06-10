@@ -107,41 +107,6 @@ $header-border: rgb(230, 230, 230);
   font-size: 14px;
   opacity: 0;
   user-select: none;
-
-  .data-table__remove:hover,
-  .data-table__edit:hover,
-  .data-table__save:hover,
-  .data-table__rollback:hover {
-    transform: scale(1.2);
-  }
-
-  .data-table__remove:active,
-  .data-table__edit:active,
-  .data-table__save:active,
-  .data-table__rollback:active {
-    transform: scale(.9);
-  }
-
-  // Иконка редактировать строку
-  .data-table__edit {
-    color: rgb(48, 74, 187);
-  }
-
-  // Иконка удалить строку
-  .data-table__remove {
-    color: rgb(211, 36, 36);
-  }
-
-  // Иконка сохранить изменения
-  .data-table__save {
-    color: #1842a5;
-    font-size: 1.2em;
-  }
-
-  // Иконка отменить изменения
-  .data-table__rollback {
-    color: rgb(211, 36, 36);
-  }
 }
 
 // Ячейка таблицы

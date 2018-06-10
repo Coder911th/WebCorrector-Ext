@@ -16,15 +16,20 @@
           <div class="about-script__menu">
             <div class="about-script__menu-left">
 
-              <div
+              <IconButton
                 ref="save"
-                class="about-script__save-button icon-floppy"
+                icon="icon-floppy"
+                color="#1842a5"
+                size="1.32em"
                 @click="onSave"
               />
 
-              <div
+              <IconButton
                 v-if="!script.isNewScript"
-                class="about-script__remove-button icon-trash-empty"
+                class="about-script__remove-button"
+                icon="icon-trash-empty"
+                color="#d0cfcf"
+                size="1.1em"
                 @click="onRemove"
               />
 
@@ -38,8 +43,10 @@
             
             <div class="about-script__menu-right">
 
-              <div
-                class="about-script__back-button icon-forward"
+              <IconButton
+                icon="icon-forward"
+                color="rgb(211, 36, 36)"
+                size="1.1em"
                 @click="onBack"
               />
 
@@ -330,19 +337,6 @@ export default {
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   line-height: 24px;
-
-  .about-script__save-button,
-  .about-script__remove-button,
-  .about-script__back-button {
-    user-select: none;
-    cursor: pointer;
-    &:hover {
-      transform: scale(1.1);
-    }
-    &:active {
-      transform: scale(.9);
-    }
-  }
 }
 
 .about-script__caption {
@@ -352,28 +346,20 @@ export default {
 .about-script__menu-left {
   width: 50px;
   display: flex;
+  align-items: center;
   font-size: 16px;
 }
 
 .about-script__menu-right {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   width: 50px;
   font-size: 16px;
 }
 
 .about-script__remove-button {
   margin-left: 10px;
-  color: #d0cfcf;
-}
-
-.about-script__save-button {
-  color: #1842a5;
-  font-size: 1.2em;
-}
-
-.about-script__back-button {
-  color: rgb(211, 36, 36);
 }
 
 .about-script__table {
