@@ -2,7 +2,7 @@ if (process.env.NODE_ENV == 'development') {
   var storage = {
     extension: true,
     version: 'v1.2.0 test',
-    nextSecurityKey: 2,
+    nextSecurityKey: 3,
     scripts: [
       {
         name: "Reloger",
@@ -11,6 +11,14 @@ if (process.env.NODE_ENV == 'development') {
         libs: ["jQuery 3.3.1"],
         code: "$('.pm-logo__link').text('Relogo')",
         securityKey: 1
+      },
+      {
+        name: "Alert",
+        sites: "",
+        active: true,
+        libs: [],
+        code: "alert('Hello world!')",
+        securityKey: 2
       }
     ],
     libs: [
