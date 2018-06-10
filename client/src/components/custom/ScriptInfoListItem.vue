@@ -35,6 +35,7 @@ export default {
   name: 'ScriptInfoListItem',
   props: ['script'],
   methods: {
+    escapeHTML,
     showContextMenu(ev) {
       new Vue.options.components.ContextMenu({
         propsData: {
@@ -53,9 +54,6 @@ export default {
         }
       }).show();
     }
-  },
-  methods: {
-    escapeHTML
   }
 }
 </script>
