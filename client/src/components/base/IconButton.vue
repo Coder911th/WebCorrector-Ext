@@ -6,8 +6,8 @@
   <div
     class="icon-button"
     @click.capture="$emit('click', {target: $el})"
-    @mouseover="scaleOn"
-    @mouseout="scaleOff"
+    @mouseover="scaleStyle = {transform: 'scale(1)'}"
+    @mouseout="scaleStyle = {}"
   >
     <div
       :class="['icon-button__icon', icon]"
@@ -47,13 +47,10 @@ export default {
     }
   },
   methods: {
-    scaleOn() {
-      this.scaleStyle = {
-        transform: 'scale(1)'
-      };
-    },
-    scaleOff() {
-      this.scaleStyle = {};
+    // Анимирует нажатие на кнопку
+    press() {
+      this.scaleStyle = {transform: 'scale(.8)'};
+      setTimeout(() => this.scaleStyle = {}, 100);
     }
   }
 }

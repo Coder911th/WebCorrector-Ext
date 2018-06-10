@@ -9,7 +9,10 @@
 -->
 <template>
   <transition name="slide-from-right">
-    <div class="about-script" v-if="script">
+    <div
+      v-if="script"
+      class="about-script"
+    >
       <ScrollArea>
         <div class="about-script__scroll-content">
           
@@ -44,6 +47,7 @@
             <div class="about-script__menu-right">
 
               <IconButton
+                ref="back"
                 icon="icon-forward"
                 color="rgb(211, 36, 36)"
                 size="1.1em"
@@ -257,7 +261,7 @@ export default {
             propsData: {
               text: (isNewScript ? lc('Скрипт успешно создан!') : lc('Сохранение прошло успешно!')) + `<br>${lc('Новый ключ безопасности')}: <b>${escapeHTML(after.securityKey)}</b>`,
               element: this.$refs.save,
-              hideAfter: 3000,
+              hideAfter: 2000,
               borderColor: 'rgb(0, 100, 0)'
             }
           }).mountToDocument()
@@ -274,7 +278,32 @@ export default {
         this.action('hideScriptInfo');
         Popup.alert(null, `${lc('Скрипт')} <b>${escapeHTML(this.scriptName)}</b> ${lc('успешно удалён')}!`);
       }
+    },
+
+    keyUpHandler(ev) {
+      if (!this.script) {
+        return;
+      }
+      
+      switch (ev.keyCode) {
+        case 27: /* Escape */
+          this.$refs.back.press();
+          this.onBack();
+          break;
+        case 13: /* Enter */
+          this.$refs.save.press();
+          this.onSave();
+          break;
+      }
+      
+      ev.preventDefault();
     }
+  },
+  mounted() {
+    document.body.addEventListener('keyup', this.keyUpHandler);
+  },
+  destroyed() {
+    document.body.removeEventListener('keyup', this.keyUpHandler);
   }
 };
 </script>
