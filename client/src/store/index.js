@@ -129,7 +129,7 @@ async function getStore() {
           if (await action('wasChanges', {before, after})) {
   
             // Обновляем хранилище скриптов локально
-            scripts.splice(scripts.indexOf(before), 1, after);
+            scripts.splice(scripts.findIndex(script => script.securityKey == before.securityKey), 1, after);
           } else {
             if (before.active != after.active) {
               action('toggleScriptActive', before);
