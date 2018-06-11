@@ -272,7 +272,7 @@ export default {
           new Vue.options.components.Tooltip({
             propsData: {
               text: (isNewScript ? lc('Скрипт успешно создан!') : lc('Сохранение прошло успешно!')) + `<br>${lc('Новый ключ безопасности')}: <b>${escapeHTML(after.securityKey)}</b>`,
-              element: this.$refs.save,
+              element: this.$refs.save.$el,
               hideAfter: 2000,
               borderColor: 'rgb(0, 100, 0)'
             }
