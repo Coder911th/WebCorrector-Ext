@@ -52,7 +52,9 @@ if (process.env.NODE_ENV == 'development') {
   window.chrome = {
     runtime: {
       // Запрос на выполнение скрипта на странице
-      sendMessage(message) {},
+      sendMessage(message) {
+        console.log('Выполнент запрос на выполнение скрипта на странице', message);
+      },
       onMessage: {
         // Обработка изменения URL-адреса активной вкладки
         addListener(callback) {}
@@ -73,6 +75,7 @@ if (process.env.NODE_ENV == 'development') {
     tabs: {
       // Запрос активной вклаки
       query(conf, callback) {
+        console.log('Выполнен запрос активной вкладки');
         callback([{url: 'extension://example.com'}]);
       }
     }
