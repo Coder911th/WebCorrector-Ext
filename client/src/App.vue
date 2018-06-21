@@ -77,7 +77,6 @@ $text: #000;
   display: inline-block;
   text-decoration: inherit;
   width: 1em;
-  margin-right: .2em;
   text-align: center;
  
   font-variant: normal;

@@ -1,9 +1,8 @@
 <!-- Переключатель между состояниями включен/выключен -->
 <template>
   <div
-    class="toggle"
-    @click="$emit('change', !checked)"
-  >
+      class="toggle"
+      @click="$emit('change', !checked)">
     <div :class="['toggle__button', {'toggle__button_on': checked}]"/>
     <div :class="['toggle__label', 'toggle__label_on']">ON</div>
     <div :class="['toggle__label', 'toggle__label_off']">OFF</div>
@@ -39,6 +38,13 @@ export default {
   background: #333;
 
   user-select: none;
+}
+
+.toggle:hover .toggle__button {
+  background: rgb(180, 9, 9);
+  &_on {
+    background: rgb(29, 138, 29);
+  }
 }
 
 .toggle__button {
