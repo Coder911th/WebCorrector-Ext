@@ -221,13 +221,14 @@ document.addEventListener('wheel', hideAllTooltips);
   left: 0;
   top: 0;
 
-  padding: 10px;
+  padding: 5px;
   box-sizing: border-box;
   min-width: 50px;
   max-width: 300px;
 
   box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
   border: 1px solid #ccc;
+  border-radius: 5px;
   background-color: #fefefe;
 
   word-wrap: break-word;
