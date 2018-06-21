@@ -2,7 +2,7 @@ if (process.env.NODE_ENV == 'development') {
   var storage = {
     extension: true,
     version: 'v1.2.0 test',
-    nextSecurityKey: 3,
+    nextSecurityKey: 4,
     scripts: [
       {
         name: "Reloger",
@@ -19,6 +19,14 @@ if (process.env.NODE_ENV == 'development') {
         libs: [],
         code: "alert('Hello world!')",
         securityKey: 2
+      },
+      {
+        name: "~(O.o)~",
+        sites: "Soluta maiores et molestiae fuga. Incidunt magni voluptas et sapiente et quis recusandae. Dolores error voluptate quas.",
+        active: true,
+        libs: [],
+        code: "// Some code",
+        securityKey: 3
       }
     ],
     libs: [
