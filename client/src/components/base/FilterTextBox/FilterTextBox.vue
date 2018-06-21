@@ -3,9 +3,11 @@
   <div class="filter-text-box">
     <div class="filter-text-box__text-line">
       <TextBox
+        :hasBorder="true"
         :placeholder="placeholder"
         :value="value"
         @input="$emit('input', $event)"
+        :style="{padding: '5px'}"
       />
       <div
         :class="['filter-text-box__button', { 'filter-text-box__button_open': isOpen }]"

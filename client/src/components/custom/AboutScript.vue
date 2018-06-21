@@ -66,23 +66,28 @@
             </div>
           </div>
 
-          <div class="about-script__label">{{'Название'|lc}}</div>
-          <TextBox 
-            v-model="scriptName"
-            :validators="[required('value')]"
-          />
-          
-          <div class="about-script__label">URL<QuestionMark
-              class="about-script__url-tooltip"
-              :text='`<div>Регулярное выражение, определяющее сайты, на которых будет автоматически срабатывать данный скрипт.</div><div style="margin-top: 5px">Пустое поле означает невозможность автоматически подгружать данный скрипт на сайты. Только вручную.</div>`|lc'
+          <FormItem class="about-script__line">
+            <template slot="label">{{'Название'|lc}}</template>
+            <TextBox 
+              v-model="scriptName"
+              :validators="[required('value')]"
             />
-          </div>
-          <TextBox
-            class="about-script__url"
-            v-model="scriptSites"
-          />
+          </FormItem>
           
-          <div class="about-script__editor-line">
+          <FormItem class="about-script__line">
+            <template slot="label">
+              URL<QuestionMark
+                class="about-script__url-tooltip"
+                :text='`<div>Регулярное выражение, определяющее сайты, на которых будет автоматически срабатывать данный скрипт.</div><div style="margin-top: 5px">Пустое поле означает невозможность автоматически подгружать данный скрипт на сайты. Только вручную.</div>`|lc'
+              />
+            </template>
+            <TextBox
+              class="about-script__url"
+              v-model="scriptSites"
+            />
+          </FormItem>
+          
+          <div class="about-script__editor-line about-script__line">
 
             <div class="row">
               <div>{{'Состояние:'|lc}}</div>
@@ -377,14 +382,6 @@ export default {
   width: 350px;
 }
 
-.about-script__label {
-  margin: 10px 0 0 5px;
-}
-
-.about-script__line {
-  margin-top: 10px;
-}
-
 .about-script__url {
   font-family: monospace;
 }
@@ -400,7 +397,10 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding-top: 10px;
+}
+
+.about-script__line {
+  margin-top: 10px;
 }
 
 .row {

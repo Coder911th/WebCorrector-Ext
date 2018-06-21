@@ -26,18 +26,22 @@
           {{'Список библиотек'|lc}}
           <QuestionMark :text="'Данные библиотеки будут доступны для подключения перед загрузкой скриптов.'|lc"/>
         </div>
-        <div class="settings__label">{{'Псевдоним'|lc}}</div>
-        <TextBox
-          v-model="libAlias"
-          class="settings__text-box"
-          :validators="aliasValidators"
-        />
-        <div class="settings__label">{{'URL библиотеки'|lc}}</div>
-        <TextBox
-          v-model="libURL"
-          class="settings__text-box"
-          :validators="urlValidators"
-        />
+        <FormItem>
+          <template slot="label">{{ 'Псевдоним:'|lc }}</template>
+          <TextBox
+            v-model="libAlias"
+            class="settings__text-box"
+            :validators="aliasValidators"
+          />
+        </FormItem>
+        <FormItem>
+          <template slot="label">{{ 'URL библиотеки:'|lc }}</template>
+          <TextBox
+            v-model="libURL"
+            class="settings__text-box"
+            :validators="urlValidators"
+          />
+        </FormItem>
         <SimpleButton
           ref="addLib"
           class="settings__add-lib"
@@ -255,10 +259,6 @@ export default {
   margin: 20px 0 0px;
   text-align: center;
   font-size: 1.2rem;
-}
-
-.settings__label {
-  margin-left: 5px;
 }
 
 .settings__text-box {
