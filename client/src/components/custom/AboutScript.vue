@@ -76,10 +76,10 @@
           
           <FormItem class="about-script__line">
             <template slot="label">
-              URL<QuestionMark
-                class="about-script__url-tooltip"
-                :text='`<div>Регулярное выражение, определяющее сайты, на которых будет автоматически срабатывать данный скрипт.</div><div style="margin-top: 5px">Пустое поле означает невозможность автоматически подгружать данный скрипт на сайты. Только вручную.</div>`|lc'
-              /><span class="about-script__colon">:</span>
+              <TextHelper
+                  text="URL"
+                  :tooltip='`<div>Регулярное выражение, определяющее сайты, на которых будет автоматически срабатывать данный скрипт.</div><div style="margin-top: 5px">Пустое поле означает невозможность автоматически подгружать данный скрипт на сайты. Только вручную.</div>`|lc'
+                  textAfter="."/>
             </template>
             <TextBox
               class="about-script__url"
@@ -449,16 +449,6 @@ export default {
 
 .about-script__table {
   margin-bottom: -1px;
-}
-
-.about-script__url-tooltip {
-  transform: scale(.7) translateY(-6px);
-  margin-left: -6px;
-  font-size: 14px;
-}
-
-.about-script__colon {
-  margin-left: -3px;
 }
 
 .about-script__toggle-active {
