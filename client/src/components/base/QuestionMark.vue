@@ -52,6 +52,7 @@ export default {
   display: inline-block;
   font-size: 18px;
   user-select: none;
+  cursor: help;
   &:hover {
     text-shadow: 0 0 3px #999;
   }
