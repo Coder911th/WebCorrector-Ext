@@ -1,51 +1,45 @@
 <!-- Прокручиваемая облась -->
 <template>
   <div
-    class="scroll-area"
-    @wheel="wheelScroll"
-  >
+      class="scroll-area"
+      @wheel="wheelScroll">
     <div
-      class="scroll-area__content"
-      :style="{
-        top: `${-y}px`,
-        left: `${-x}px`
-      }"
-    >
+        class="scroll-area__content"
+        :style="{
+          top: `${-y}px`,
+          left: `${-x}px`
+        }">
       <slot/>
     </div>
     <div
-      v-if="containerHeight < contentHeight"
-      class="scroll-area__vertical-scrollbar"
-      @mousedown="clickScroll($event, 'vertical')"
-      :style="{
-        height: `${containerHeight}px`,
-        opacity: scrolling == 'vertical' || highlighting.vertical ? 1 : undefined
-      }"
-    >
-      <div
-        class="scroll-area__vertical-scrollbar-slider"
+        v-if="containerHeight < contentHeight"
+        class="scroll-area__vertical-scrollbar"
+        @mousedown="clickScroll($event, 'vertical')"
         :style="{
-          height: `${verticalScrollbarHeight}px`,
-          top: `${verticalScrollbarOffset}px`
-        }"
-      />
+          height: `${containerHeight}px`,
+          opacity: scrolling == 'vertical' || highlighting.vertical ? 1 : undefined
+        }">
+      <div
+          class="scroll-area__vertical-scrollbar-slider"
+          :style="{
+            height: `${verticalScrollbarHeight}px`,
+            top: `${verticalScrollbarOffset}px`
+          }"/>
     </div>
     <div
-      v-if="containerWidth < contentWidth"
-      class="scroll-area__horizontal-scrollbar"
-      @mousedown="clickScroll($event, 'horizontal')"
-      :style="{
-        width: `${containerWidth}px`,
-        opacity: scrolling == 'horizontal' || highlighting.horizontal ? 1 : undefined
-      }"
-    >
-      <div
-        class="scroll-area__horizontal-scrollbar-slider"
+        v-if="containerWidth < contentWidth"
+        class="scroll-area__horizontal-scrollbar"
+        @mousedown="clickScroll($event, 'horizontal')"
         :style="{
-          width: `${horizontalScrollbarWidth}px`,
-          left: `${horizontalScrollbarOffset}px`
-        }"
-      />
+          width: `${containerWidth}px`,
+          opacity: scrolling == 'horizontal' || highlighting.horizontal ? 1 : undefined
+        }">
+      <div
+          class="scroll-area__horizontal-scrollbar-slider"
+          :style="{
+            width: `${horizontalScrollbarWidth}px`,
+            left: `${horizontalScrollbarOffset}px`
+          }"/>
     </div>
   </div>
 </template>

@@ -4,11 +4,12 @@
 <template>
   <div class="check-boxes-panel">
     <TextCheckBox
-      v-for="(checked, flagName) in flags"
-      :key="flagName"
-      :checked="checked"
-      @check="change(flagName, $event)"
-    >{{description[flagName]}}</TextCheckBox>
+        v-for="(checked, flagName) in flags"
+        :key="flagName"
+        :checked="checked"
+        @check="change(flagName, $event)">
+      {{ description[flagName] }}
+    </TextCheckBox>
   </div>
 </template>
 

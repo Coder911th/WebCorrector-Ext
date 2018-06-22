@@ -1,9 +1,8 @@
 <!-- Простая кнопка -->
 <template>
   <div
-    class="simple-button"
-    @click="$emit('click', $event)"
-  >
+      class="simple-button"
+      @click="$emit('click', $event)">
     <slot/>
   </div>
 </template>

@@ -2,21 +2,23 @@
 <template>
   <div class="named-switch">
     <div
-      :class="[
-        'named-switch__button',
-        'named-switch__left',
-        {'named-switch__button_active': active == leftText}
-      ]"
-      @click="switchToLeft"
-    >{{ leftText }}</div>
+        :class="[
+          'named-switch__button',
+          'named-switch__left',
+          {'named-switch__button_active': active == leftText}
+        ]"
+        @click="switchToLeft">
+      {{ leftText }}
+    </div>
     <div 
-      :class="[
-        'named-switch__button',
-        'named-switch__right',
-        {'named-switch__button_active': active == rightText}
-      ]"
-      @click="switchToRight"
-    >{{ rightText }}</div>
+        :class="[
+          'named-switch__button',
+          'named-switch__right',
+          {'named-switch__button_active': active == rightText}
+        ]"
+        @click="switchToRight">
+      {{ rightText }}
+    </div>
   </div>
 </template>
 

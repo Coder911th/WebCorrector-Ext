@@ -1,22 +1,21 @@
 <!-- Контекстное меню -->
 <template>
   <transition
-    appear
-    name="fade"
-  >
+      appear
+      name="fade">
     <div
-      class="context-menu"
-      :style="{
-          top: `${computedY}px`,
-          left: `${computedX}px`
-        }"
-    >
+        class="context-menu"
+        :style="{
+            top: `${computedY}px`,
+            left: `${computedX}px`
+          }">
       <div
-        class="context-menu__item"
-        v-for="(item, index) of items"
-        :key="index"
-        @click="item.onClick()"
-      >{{item.text}}</div>
+          class="context-menu__item"
+          v-for="(item, index) of items"
+          :key="index"
+          @click="item.onClick()">
+        {{ item.text }}
+      </div>
     </div>
   </transition>
 </template>

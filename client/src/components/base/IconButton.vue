@@ -4,18 +4,16 @@
 
 <template>
   <div
-    class="icon-button"
-    @click.capture="$emit('click', {target: $el})"
-    @mouseover="scaleStyle = {transform: 'scale(1)'}"
-    @mouseout="scaleStyle = {}"
-  >
+      class="icon-button"
+      @click.capture="$emit('click', {target: $el})"
+      @mouseover="scaleStyle = {transform: 'scale(1)'}"
+      @mouseout="scaleStyle = {}">
     <div
-      :class="['icon-button__icon', icon]"
-      :style="[{
-        fontSize: size,
-        color: color
-      }, scaleStyle]"
-    />
+        :class="['icon-button__icon', icon]"
+        :style="[{
+          fontSize: size,
+          color: color
+        }, scaleStyle]"/>
   </div>
 </template>
 

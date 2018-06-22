@@ -1,16 +1,13 @@
 <!-- Редактор JavaScript кода (интеграция CodeMirror) -->
 <template>
-  <div
-    class="editor"
-  >
+  <div class="editor">
     <div
-      ref="editor"
-      v-show="fullscreen"
-      @keydown="$emit('input', getCode())"
-    />
-    <SimpleButton
-      @click="toFullscreenMode"
-    >{{'Открыть редактор кода'|lc}}</SimpleButton>
+        ref="editor"
+        v-show="fullscreen"
+        @keydown="$emit('input', getCode())"/>
+    <SimpleButton @click="toFullscreenMode">{{
+      'Открыть редактор кода'|lc
+    }}</SimpleButton>
   </div>
 </template>
 

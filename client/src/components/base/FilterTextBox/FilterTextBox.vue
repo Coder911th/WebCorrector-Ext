@@ -3,26 +3,22 @@
   <div class="filter-text-box">
     <div class="filter-text-box__text-line">
       <TextBox
-        :hasBorder="true"
-        :placeholder="placeholder"
-        :value="value"
-        @input="$emit('input', $event)"
-        :style="{padding: '5px'}"
-      />
+          :hasBorder="true"
+          :placeholder="placeholder"
+          :value="value"
+          @input="$emit('input', $event)"
+          :style="{padding: '5px'}"/>
       <div
-        :class="['filter-text-box__button', { 'filter-text-box__button_open': isOpen }]"
-        @click="isOpen = !isOpen"
-      />
+          :class="['filter-text-box__button', { 'filter-text-box__button_open': isOpen }]"
+          @click="isOpen = !isOpen"/>
     </div>
     <transition
-      name="slide"
-      @after-leave="onToggleFilterPanel"
-      @after-enter="onToggleFilterPanel"
-    >
+        name="slide"
+        @after-leave="onToggleFilterPanel"
+        @after-enter="onToggleFilterPanel">
       <div
-        class="filter-text-box__panel"
-        v-show="isOpen"
-      >
+          class="filter-text-box__panel"
+          v-show="isOpen">
         <slot/>
       </div>
     </transition>

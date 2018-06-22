@@ -3,32 +3,30 @@
 <template>
   <div class="script-list">
     <FilterTextBox
-      v-if="showFilter"
-      v-model="filterField"
-      :placeholder="'Поиск'|lc"
-    >
+        v-if="showFilter"
+        v-model="filterField"
+        :placeholder="'Поиск'|lc">
       <CheckBoxesPanel
-        v-model="filterFlags"
-        :description="flagsDescription"
-        :validators="[flagsValidator]"
-      />
+          v-model="filterFlags"
+          :description="flagsDescription"
+          :validators="[flagsValidator]"/>
     </FilterTextBox>
+
     <ScrollArea
-      ref="scrollArea"
-      class="script-list__list"
-    >
+        ref="scrollArea"
+        class="script-list__list">
       <template v-if="filteredList.length">
         <div
-          v-for="item of filteredList"
-          :key="item.securityKey"
-        >
+            v-for="item of filteredList"
+            :key="item.securityKey">
           <ScriptInfoListItem :script="item"/>
         </div>
       </template>
       <div
-        v-else
-        class="script-list__empty-list-message"
-      >{{emptyListMessage}}</div>
+          v-else
+          class="script-list__empty-list-message">
+        {{ emptyListMessage }}
+      </div>
     </ScrollArea>
   </div>
 </template>

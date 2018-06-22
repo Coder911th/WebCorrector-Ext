@@ -2,23 +2,20 @@
 
 <template>
   <transition
-    appear
-    name="fade"
-  >
+      appear
+      name="fade">
     <div
-      v-show="isVisible"
-      class="tooltip"
-      :style="{
-        borderColor: borderColor,
-        left: `${left}px`,
-        top: `${top}px`
-      }"
-    >
+        v-show="isVisible"
+        class="tooltip"
+        :style="{
+          borderColor: borderColor,
+          left: `${left}px`,
+          top: `${top}px`
+        }">
       <div v-html="text"/>
       <div
-        class="tooltip__arrow"
-        :style="arrowStyle"
-      />
+          class="tooltip__arrow"
+          :style="arrowStyle"/>
     </div>
   </transition>
 </template>

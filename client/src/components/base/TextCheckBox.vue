@@ -1,10 +1,9 @@
 <!-- Компонент: Флаг. Реализация: текстовый символ -->
 <template>
   <div
-    class="check-box"
-    @click="$emit('check', !checked)"
-  >
-    <div>{{checked ? '☑' : '☐'}} <slot/></div>
+      class="check-box"
+      @click="$emit('check', !checked)">
+    <div>{{ checked ? '☑' : '☐' }} <slot/></div>
   </div>
 </template>
 

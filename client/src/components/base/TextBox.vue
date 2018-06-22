@@ -1,13 +1,12 @@
 <!-- Тестовое поле -->
 <template>
   <input
-    class="text-box" 
-    type="text"
-    :placeholder="placeholder"
-    :value="value"
-    @input="$emit('input', $event.target.value)"
-    :style="hasBorder ? {border: '1px solid #ccc'} : null"
-  >
+      class="text-box" 
+      type="text"
+      :placeholder="placeholder"
+      :value="value"
+      @input="$emit('input', $event.target.value)"
+      :style="hasBorder ? {border: '1px solid #ccc'} : null">
 </template>
 
 <script>

@@ -2,9 +2,9 @@
 <template>
   <div class="current-site-scripts">
     <ScriptsList
-      :items="scripts"
-      :showFilter="false"
-      :emptyListMessage="emptyMessage"/>
+        :items="scripts"
+        :showFilter="false"
+        :emptyListMessage="emptyMessage"/>
   </div>
 </template>
 

@@ -4,60 +4,58 @@
     <div class="settings">
       <div class="settings__header">
         <NamedSwitch
-          v-model="lang"
-          @change="changeLocalization"
-          leftText="EN"
-          rightText="RU"
-          class="settings__lang"
-        />
+            v-model="lang"
+            @change="changeLocalization"
+            leftText="EN"
+            rightText="RU"
+            class="settings__lang"/>
         <div class="settings__caption">WebCorrector Ext.</div>
-        <div class="settings__version">{{$store.state.version}}</div>
-        <div class="settings__author">{{'Ложкин Дмитрий'|lc}}</div>
+        <div class="settings__version">{{ $store.state.version }}</div>
+        <div class="settings__author">{{ 'Ложкин Дмитрий'|lc }}</div>
       </div>
       <div class="settings__status">
-        <span>{{'Расширение'|lc}}</span><Toggle v-model="extension"/>
+        <span>{{ 'Расширение'|lc }}</span><Toggle v-model="extension"/>
         <SimpleButton
-          class="settings__create-script"
-          @click="action('createScript')"
-        >{{'Новый скрипт'|lc}}</SimpleButton>
+            class="settings__create-script"
+            @click="action('createScript')">
+          {{ 'Новый скрипт'|lc }}
+        </SimpleButton>
       </div>
       <div>
         <div class="settings__lib-header">
-          {{'Список библиотек'|lc}}
+          {{ 'Список библиотек'|lc }}
           <QuestionMark :text="'Данные библиотеки будут доступны для подключения перед загрузкой скриптов.'|lc"/>
         </div>
         <FormItem>
           <template slot="label">{{ 'Псевдоним:'|lc }}</template>
           <TextBox
-            v-model="libAlias"
-            class="settings__text-box"
-            :validators="aliasValidators"
-          />
+              v-model="libAlias"
+              class="settings__text-box"
+              :validators="aliasValidators"/>
         </FormItem>
         <FormItem>
           <template slot="label">{{ 'URL библиотеки:'|lc }}</template>
           <TextBox
-            v-model="libURL"
-            class="settings__text-box"
-            :validators="urlValidators"
-          />
+              v-model="libURL"
+              class="settings__text-box"
+              :validators="urlValidators"/>
         </FormItem>
         <SimpleButton
-          ref="addLib"
-          class="settings__add-lib"
-          @click="addLib"
-        >{{'Добавить'|lc}}</SimpleButton>
+            ref="addLib"
+            class="settings__add-lib"
+            @click="addLib">
+          {{ 'Добавить'|lc }}
+        </SimpleButton>
       </div>
       <DataTable
-        class="settings__table"
-        v-model="libs"
-        keyField="alias"
-        :columns="libsColumns"
-        :editable="true"
-        :emptyTableText="'Нет ни одной библиотеки'|lc"
-        :onRemove="onRemoveLib"
-        :onSave="onSaveLib"
-      />
+          class="settings__table"
+          v-model="libs"
+          keyField="alias"
+          :columns="libsColumns"
+          :editable="true"
+          :emptyTableText="'Нет ни одной библиотеки'|lc"
+          :onRemove="onRemoveLib"
+          :onSave="onSaveLib"/>
     </div>
   </ScrollArea>
 </template>

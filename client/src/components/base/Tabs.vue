@@ -4,21 +4,19 @@
   <div class="tabs">
     <div class="tabs__menu">
       <div
-        class="tabs__button"
-        :class="{ 'tabs__button_current': index == currentIndex }"
-        v-for="(tab, index) of items" 
-        :key="tab.caption"
-        @click="currentIndex = index; $emit('onTabChanged', index)"
-      >
-        {{tab.caption}}
+          class="tabs__button"
+          :class="{ 'tabs__button_current': index == currentIndex }"
+          v-for="(tab, index) of items" 
+          :key="tab.caption"
+          @click="currentIndex = index; $emit('onTabChanged', index)">
+        {{ tab.caption }}
       </div>
     </div>
     <keep-alive>
       <component
-        class="tabs__content"
-        :is="items[currentIndex].component"
-        :key="items[currentIndex].key"
-      />
+          class="tabs__content"
+          :is="items[currentIndex].component"
+          :key="items[currentIndex].key"/>
     </keep-alive>
   </div>
 </template>

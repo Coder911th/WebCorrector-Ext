@@ -2,14 +2,13 @@
 <template>
   <div :class="['spoiler', {'spoiler_collapsed': !isOpen}]">
     <div
-      class="spoiler__caption"
-      @click="toggle"
-    >{{caption}}</div>
-      <transition name="slide">
-        <div class="spoiler__content" v-if="isOpen">
-          <slot/>
-        </div>
-      </transition>
+        class="spoiler__caption"
+        @click="toggle">{{ caption }}</div>
+    <transition name="slide">
+      <div class="spoiler__content" v-if="isOpen">
+        <slot/>
+      </div>
+    </transition>
   </div>
 </template>
 

@@ -10,32 +10,26 @@
 <template>
   <transition name="slide-from-right">
     <div
-      v-if="script"
-      class="about-script"
-    >
+        v-if="script"
+        class="about-script">
       <ScrollArea>
         <div class="about-script__scroll-content">
-          
           <div class="about-script__menu">
             <div class="about-script__menu-left">
+              <IconButton
+                  ref="save"
+                  icon="icon-floppy"
+                  color="#1842a5"
+                  size="1.32em"
+                  @click="onSave"/>
 
               <IconButton
-                ref="save"
-                icon="icon-floppy"
-                color="#1842a5"
-                size="1.32em"
-                @click="onSave"
-              />
-
-              <IconButton
-                v-if="!script.isNewScript"
-                class="about-script__remove-button"
-                icon="icon-trash-empty"
-                color="#d0cfcf"
-                size="1.1em"
-                @click="onRemove"
-              />
-
+                  v-if="!script.isNewScript"
+                  class="about-script__remove-button"
+                  icon="icon-trash-empty"
+                  color="#d0cfcf"
+                  size="1.1em"
+                  @click="onRemove"/>
             </div>
 
             <div class="about-script__caption">{{
@@ -45,33 +39,27 @@
             |lc}}</div>
             
             <div class="about-script__menu-right">
-
               <IconButton
-                ref="play"
-                class="about-script__play-button"
-                icon="icon-play"
-                color="#424442"
-                size="1.1em"
-                @click="onPlay"
-              />
-
+                  ref="play"
+                  class="about-script__play-button"
+                  icon="icon-play"
+                  color="#424442"
+                  size="1.1em"
+                  @click="onPlay"/>
               <IconButton
-                ref="back"
-                icon="icon-forward"
-                color="rgb(211, 36, 36)"
-                size="1.1em"
-                @click="onBack"
-              />
-
+                  ref="back"
+                  icon="icon-forward"
+                  color="rgb(211, 36, 36)"
+                  size="1.1em"
+                  @click="onBack"/>
             </div>
           </div>
 
           <FormItem class="about-script__line">
-            <template slot="label">{{'Название:'|lc}}</template>
+            <template slot="label">{{ 'Название:'|lc }}</template>
             <TextBox 
-              v-model="scriptName"
-              :validators="[required('value')]"
-            />
+                v-model="scriptName"
+                :validators="[required('value')]"/>
           </FormItem>
           
           <FormItem class="about-script__line">
@@ -82,51 +70,42 @@
                   textAfter="."/>
             </template>
             <TextBox
-              class="about-script__url"
-              v-model="scriptSites"
-            />
+                class="about-script__url"
+                v-model="scriptSites"/>
           </FormItem>
           
           <div class="about-script__editor-line about-script__line">
-
             <div class="row">
-              <div>{{'Состояние:'|lc}}</div>
+              <div>{{ 'Состояние:'|lc }}</div>
               <Toggle
-                class="about-script__toggle-active"
-                v-model="scriptActive"
-              />
+                  class="about-script__toggle-active"
+                  v-model="scriptActive"/>
             </div>
-
             <div class="row">
               <Editor
-                ref="editor"
-                v-model="scriptCode"
-              />
+                  ref="editor"
+                  v-model="scriptCode"/>
               <QuestionMark
-                :text="'<b>Редактор кода</b><div style=&quot;margin-bottom: 5px&quot;>Нажмите ESC, чтобы выйти из режима редактирования.</div><div>Ctrl+Space - автодополнение.</div>'|lc"
-              />
+                  :text="'<b>Редактор кода</b><div style=&quot;margin-bottom: 5px&quot;>Нажмите ESC, чтобы выйти из режима редактирования.</div><div>Ctrl+Space - автодополнение.</div>'|lc"/>
             </div>
-
           </div>
 
           <Spoiler
-            class="about-script__line"
-            :caption="'Подключаемые библиотеки'|lc"
-            :initOpen="isOpenSpoiler"
-            @toggle="setState('isOpenSpoiler', !isOpenSpoiler)">
+              class="about-script__line"
+              :caption="'Подключаемые библиотеки'|lc"
+              :initOpen="isOpenSpoiler"
+              @toggle="setState('isOpenSpoiler', !isOpenSpoiler)">
             <DataTable
-              class="about-script__table"
-              v-model="libs"
-              keyField="alias"
-              :columns="tableColumns"
-              :emptyTableText="'Нет ни одной библиотеки'|lc"
-            >
+                class="about-script__table"
+                v-model="libs"
+                keyField="alias"
+                :columns="tableColumns"
+                :emptyTableText="'Нет ни одной библиотеки'|lc">
               <template slot="isConnected" slot-scope="{row}">
                 <TextCheckBox
-                  class="about-script__checkbox"
-                  :checked="scriptLibs.indexOf(row.alias) > -1"
-                  @check="toggleLib(row.alias, $event)"
-                />
+                    class="about-script__checkbox"
+                    :checked="scriptLibs.indexOf(row.alias) > -1"
+                    @check="toggleLib(row.alias, $event)"/>
               </template>
             </DataTable>
           </Spoiler>

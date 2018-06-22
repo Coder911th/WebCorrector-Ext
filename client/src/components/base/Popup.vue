@@ -4,28 +4,30 @@
   <div class="popup">
     <div class="popup__window">
       <div
-        v-if="caption"
-        v-html="caption"
-        class="popup__caption"
-      />
+          v-if="caption"
+          v-html="caption"
+          class="popup__caption"/>
       <div class="popup__message" v-html="message"/>
       
       <SimpleButton
-        v-if="type == 'alert'"
-        @click="destroy()"
-      >OK</SimpleButton>
+          v-if="type == 'alert'"
+          @click="destroy()">
+        OK
+      </SimpleButton>
       
       <div>
         <SimpleButton
-          v-if="type == 'confirm'"
-          @click="onPositive();destroy()"
-        >{{positiveButtonText}}</SimpleButton>
+            v-if="type == 'confirm'"
+            @click="onPositive();destroy()">
+          {{ positiveButtonText }}
+        </SimpleButton>
 
         <SimpleButton
-          v-if="type == 'confirm'"
-          @click="onNegative();destroy()"
-          style="margin-left: 10px"
-        >{{negativeButtonText}}</SimpleButton>
+            v-if="type == 'confirm'"
+            @click="onNegative();destroy()"
+            style="margin-left: 10px">
+          {{ negativeButtonText }}
+        </SimpleButton>
       </div>
     </div>
   </div>

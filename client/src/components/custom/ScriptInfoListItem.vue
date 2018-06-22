@@ -1,35 +1,31 @@
 <!-- Элемент списка скриптов -->
 <template>
   <div
-    :class="[
-      'script-info-list-item',
-      {
-        disabled: script.sites && !script.active,
-        'without-target': !script.sites
-      }
-    ]"
-    @click="action('showScriptInfo', script);"
-    @contextmenu.prevent="showContextMenu"
-  >
+      :class="[
+        'script-info-list-item',
+        {
+          disabled: script.sites && !script.active,
+          'without-target': !script.sites
+        }
+      ]"
+      @click="action('showScriptInfo', script);"
+      @contextmenu.prevent="showContextMenu">
     <div class="script-info-list-item__info">
-
       <div
-        class="script-info-list-item__name"
-        v-tooltip="script.name.length > 20 ? escapeHTML(script.name) : ''"
-      >{{script.name}}</div>
-
+          class="script-info-list-item__name"
+          v-tooltip="script.name.length > 20 ? escapeHTML(script.name) : ''">
+        {{ script.name }}
+      </div>
       <div
-        class="script-info-list-item__sites"
-        v-tooltip="script.sites.length > 20 ? escapeHTML(script.sites) : ''"
-      >{{script.sites}}</div>
-
+          class="script-info-list-item__sites"
+          v-tooltip="script.sites.length > 20 ? escapeHTML(script.sites) : ''">
+        {{ script.sites }}
+      </div>
     </div>
-
     <div class="script-info-list-item__security-key">
       <div>Security key</div>
-      <div>{{script.securityKey}}</div>
+      <div>{{ script.securityKey }}</div>
     </div>
-
   </div>
 </template>
 
