@@ -122,7 +122,7 @@ import Editor from '@/Editor';
 import Popup from 'JavaScript/PopupManager';
 import Validation from 'Mixins/Validation';
 import Validators from 'JavaScript/Validators';
-import {escapeHTML} from 'JavaScript/escape.js';
+import {escapeHTML} from 'JavaScript/Escape.js';
 
 export default {
   name: 'AboutScript',

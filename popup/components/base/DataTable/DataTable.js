@@ -12,7 +12,7 @@
 */
 
 import Vue from 'vue';
-import {escapeHTML} from 'JavaScript/escape.js';
+import {escapeHTML} from 'JavaScript/Escape.js';
 
 export default {
   name: 'DataTable',

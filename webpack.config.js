@@ -73,7 +73,7 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, 'popup/components/custom/'),
       'Assets': path.resolve(__dirname, 'popup/assets/'),
-      'JavaScript': path.resolve(__dirname, 'popup/javascript/'),
+      'JavaScript': path.resolve(__dirname, 'popup/JavaScript/'),
       'Mixins': path.resolve(__dirname, 'popup/mixins/'),
       'Store': path.resolve(__dirname, 'popup/store/')
     },

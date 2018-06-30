@@ -4,7 +4,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import {addSetStateMixin, addActionMixin} from 'JavaScript/VuexHelpers';
 import Localization from 'JavaScript/Localization';
-import Store from 'Store/index.js';
+import Store from 'Store/Store.js';
 
 // Объявляем глобально базовые компоненты приложения
 let requireComponent = require.context('./components/base', true, /\.vue$/);

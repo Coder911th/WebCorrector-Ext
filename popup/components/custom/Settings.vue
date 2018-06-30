@@ -66,7 +66,7 @@ import {vModel} from 'JavaScript/VuexHelpers';
 import Validation from 'Mixins/Validation';
 import Validators from 'JavaScript/Validators';
 import Popup from 'JavaScript/PopupManager';
-import {escapeHTML} from 'JavaScript/escape.js';
+import {escapeHTML} from 'JavaScript/Escape.js';
 
 export default {
   name: 'Settings',

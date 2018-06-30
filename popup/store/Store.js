@@ -2,8 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import {vuexStates} from 'JavaScript/VuexHelpers';
 import Popup from 'JavaScript/PopupManager';
-import {getCurrentUrl} from '../javascript/BrowserExtensionHelpers';
-import {escapeHTML} from 'JavaScript/escape.js'
+import {getCurrentUrl} from 'JavaScript/BrowserExtensionHelpers';
+import {escapeHTML} from 'JavaScript/Escape.js'
 
 Vue.use(Vuex);
 
