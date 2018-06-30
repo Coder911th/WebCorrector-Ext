@@ -1,4 +1,8 @@
 node_modules
+extension/assets
+extension/build-background.js
+extension/build-content.js
+extension/build-popup.js
 .vscode
 
 # Logs
