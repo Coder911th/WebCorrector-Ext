@@ -8,7 +8,7 @@ module.exports = {
     background: './background-script/entry-background.js'
   },
   output: {
-    path: path.resolve(__dirname, './extension'),
+    path: path.resolve(__dirname, 'extension'),
     publicPath: '/',
     filename: 'build-[name].js'
   },
