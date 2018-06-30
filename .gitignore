@@ -1,6 +1,4 @@
-client/dist
-extension/dist
-client/node_modules
+node_modules
 .vscode
 
 # Logs

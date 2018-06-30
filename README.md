@@ -1,1 +1,1 @@
-*WebCorrector-Ext.*
+*WebCorrector-Ext.* - script manager extension.

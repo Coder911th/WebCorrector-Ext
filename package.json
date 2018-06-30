@@ -1,6 +1,6 @@
 {
   "name": "web-corrector-extension",
-  "description": "A Vue.js project",
+  "description": "Script manager extension",
   "version": "1.2.0dev",
   "author": "Dmitry Lozhkin <31573763+Coder911th@users.noreply.github.com>",
   "license": "MIT",

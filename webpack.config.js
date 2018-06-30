@@ -2,11 +2,15 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './src/main.js',
+  entry: {
+    popup: './popup/entry-popup.js',
+    content: './content-script/entry-content.js',
+    background: './background-script/entry-background.js'
+  },
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: 'build.js'
+    path: path.resolve(__dirname, './extension'),
+    publicPath: '/',
+    filename: 'build-[name].js'
   },
   module: {
     rules: [
@@ -67,15 +71,16 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src/components/custom/'),
-      'Assets': path.resolve(__dirname, 'src/assets/'),
-      'JavaScript': path.resolve(__dirname, 'src/javascript/'),
-      'Mixins': path.resolve(__dirname, 'src/mixins/'),
-      'Store': path.resolve(__dirname, 'src/store/')
+      '@': path.resolve(__dirname, 'popup/components/custom/'),
+      'Assets': path.resolve(__dirname, 'popup/assets/'),
+      'JavaScript': path.resolve(__dirname, 'popup/javascript/'),
+      'Mixins': path.resolve(__dirname, 'popup/mixins/'),
+      'Store': path.resolve(__dirname, 'popup/store/')
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
   devServer: {
+    contentBase: path.resolve(__dirname, 'extension'),
     historyApiFallback: true,
     noInfo: true,
     overlay: true

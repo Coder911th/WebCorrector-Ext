@@ -2,7 +2,7 @@
     "name": "WebCorrector Ext.",
     "version": "1.2.0",
     "version_name": "1.2.0 dev",
-    "description": "Make the web better!",
+    "description": "Script manager",
 
     "manifest_version": 2,
 
@@ -18,13 +18,13 @@
     "content_scripts": [
         {
             "matches": [ "http://*/*", "https://*/*" ],
-            "js": [ "loader.js" ],
+            "js": [ "build-content.js" ],
             "run_at": "document_end"
         }
     ],
 
     "background": {
-        "scripts": ["background.js"],
+        "scripts": ["build-background.js"],
         "persistent": false
     },
 
