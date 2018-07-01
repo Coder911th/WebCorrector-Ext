@@ -7,7 +7,7 @@
       class="question-mark icon-help"
       tabindex="0"
       @focus="showTooltip"
-      @blur="!isMouseOver ? hideTooltip : null"
+      @blur="!isMouseOver ? hideTooltip() : null"
       @mouseenter="isMouseOver = true; showTooltip()"
       @mouseleave="isMouseOver = false; hideTooltip()"/>
 </template>
