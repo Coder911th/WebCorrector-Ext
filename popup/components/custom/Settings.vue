@@ -22,10 +22,10 @@
         </SimpleButton>
       </div>
       <div>
-        <div class="settings__lib-header">
-          {{ 'Список библиотек'|lc }}
-          <QuestionMark :text="'Данные библиотеки будут доступны для подключения перед загрузкой скриптов.'|lc"/>
-        </div>
+        <TextHelper
+            class="settings__lib-header"
+            :text="'Список библиотек'|lc"
+            :tooltip="'Данные библиотеки будут доступны для подключения перед загрузкой скриптов.'|lc"/>
         <FormItem>
           <template slot="label">{{ 'Псевдоним:'|lc }}</template>
           <TextBox
@@ -254,6 +254,7 @@ export default {
 }
 
 .settings__lib-header {
+  display: block !important;
   margin: 20px 0 0px;
   text-align: center;
   font-size: 1.2rem;
