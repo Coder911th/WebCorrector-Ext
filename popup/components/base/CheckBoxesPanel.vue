@@ -3,13 +3,13 @@
 
 <template>
   <div class="check-boxes-panel">
-    <TextCheckBox
+    <CheckBox
         v-for="(checked, flagName) in flags"
         :key="flagName"
         :checked="checked"
         @check="change(flagName, $event)">
       {{ description[flagName] }}
-    </TextCheckBox>
+    </CheckBox>
   </div>
 </template>
 

@@ -115,7 +115,7 @@
                 :columns="tableColumns"
                 :emptyTableText="'Нет ни одной библиотеки'|lc">
               <template slot="isConnected" slot-scope="{row}">
-                <TextCheckBox
+                <CheckBox
                     class="about-script__checkbox"
                     :checked="scriptLibs.indexOf(row.alias) > -1"
                     @check="toggleLib(row.alias, $event)"/>

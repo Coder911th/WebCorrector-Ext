@@ -5,15 +5,11 @@
 -->
 <template>
   <div class="form-item">
-    <div 
+    <vLabel
         class="form-item__label"
-        :style="{
-          width,
-          textAlign: align
-        }"
-        @click="activeLink">
+        @click="activateLink">
       <slot name="label"/>
-    </div>
+    </vLabel>
     <div ref="control" class="form-item__control">
       <slot/>
     </div>
@@ -23,20 +19,8 @@
 <script>
 export default {
   name: 'FormItem',
-  props: {
-    // Ширина, которая отводится под label
-    width: {
-      type: Number,
-      default: null
-    },
-    // Выравнивание метки
-    align: {
-      type: String,
-      default: 'left'
-    }
-  },
   methods: {
-    activeLink() {
+    activateLink() {
       let control = this.$refs.control.firstElementChild;
       if (control) {
         control.focus();
@@ -53,11 +37,6 @@ export default {
 
 .form-item__label {
   margin-right: 5px;
-  cursor: pointer;
-  user-select: none;
-  &:hover {
-    color: #555;
-  }
 }
 
 .form-item__control {
