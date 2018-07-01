@@ -10,13 +10,15 @@
         {
           'check-box_checked': checked
         }
-      ]">
+      ]"
+      tabindex="0"
+      @keyup.enter.space="toggle">
     <div
         class="check-box__flag"
-        @click="$emit('check', !checked)"/>
+        @click="toggle"/>
     <vLabel
         class="check-box__label"
-        @click="$emit('check', !checked)">
+        @click="toggle">
       <slot/>
     </vLabel>
   </div>
@@ -34,6 +36,11 @@ export default {
       type: Boolean,
       required: true
     }
+  },
+  methods: {
+    toggle() {
+      this.$emit('check', !this.checked);
+    }
   }
 }
 </script>
@@ -41,19 +48,18 @@ export default {
 <style lang="scss">
 .check-box {
   display: block;
+  outline: none;
   user-select: none;
   margin: 5px 0;
 
-  &_checked {
-    .check-box__flag::before {
-      content: "";
-      position: absolute;
-      top: 2px;
-      right: 2px;
-      bottom: 2px;
-      left: 2px;
-      background: #555;
+  &:focus {
+    .check-box__label {
+      text-decoration: underline;
     }
+  }
+
+  &_checked .check-box__flag::before {
+    background: #555;
   }
 
   &__flag {
@@ -65,6 +71,16 @@ export default {
     background: #fff;
     border: 2px solid #ccc;
     vertical-align: middle;
+
+    &::before {
+      transition: background-color .3s;
+      content: "";
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      bottom: 2px;
+      left: 2px;
+    }
   }
 
   &__label {

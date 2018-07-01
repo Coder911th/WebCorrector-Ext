@@ -169,18 +169,18 @@ export default {
       {
         field: 'alias',
         caption: lc('Название'),
-        width: 'calc(50% - 10px)'
+        width: 'calc(50% - 15px)'
       },
       {
         field: 'url',
         caption: 'URL',
-        width: 'calc(50% - 10px)',
+        width: 'calc(50% - 15px)',
         overflow: 'nowrap',
         tooltip: 1
       },
       {
         field: 'isConnected',
-        width: '10px',
+        width: '20px',
         computed: true
       }
     ]
@@ -350,7 +350,6 @@ export default {
 }
 
 .about-script__checkbox {
-  height: 100%;
   display: flex !important;
   justify-content: center;
   align-items: center;
