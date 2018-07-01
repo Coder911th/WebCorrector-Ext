@@ -6,14 +6,27 @@
   > icon-forward
   > icon-floppy
   > icon-trash
+
+  Hotkeys:
+    F5 - выполнить скрипт
+    Shift+S - Сохранить скрипт
+    backspace - Закрыть окно
 -->
 <template>
   <transition name="slide-from-right">
     <div
         v-if="script"
-        class="about-script">
+        ref="panel"
+        class="about-script"
+        tabindex="0"
+        @keydown.shift.83.prevent="press('save')"
+        @keyup.shift.83="unpress('save')"
+        @keydown.8.prevent="press('back')"
+        @keyup.8="unpress('back')"
+        @keydown.116.prevent="press('play')"
+        @keyup.116="unpress('play')">
       <ScrollArea>
-        <div class="about-script__scroll-content">
+        <div class="about-script__scroll-content"> 
           <div class="about-script__menu">
             <div class="about-script__menu-left">
               <IconButton
@@ -176,6 +189,14 @@ export default {
 
     // Валидатор поля, обязательного к заполнению
     required: Validators.required,
+
+    press(target) {
+      return this.$refs[target].isActive = true;
+    },
+
+    unpress(target) {
+      return this.$refs[target].click();
+    },
     
     // Переключает состояние библиотеки alias в текущем скрипте на value
     toggleLib(alias, value) {
@@ -302,46 +323,9 @@ export default {
         type: 'execScript',
         data: this.script.name
       });
-    },
-
-    keyUpHandler(ev) {
-      if (!this.script || this.$refs.editor.fullscreen) {
-        return;
-      }
-      
-      switch (ev.keyCode) {
-        case 116: /* F5 */
-          this.$refs.play.press();
-          this.onPlay();
-          break;
-        case 27: /* Escape */
-          this.$refs.back.press();
-          this.onBack();
-          break;
-        case 13: /* Enter */
-          this.$refs.save.press();
-          this.onSave();
-          break;
-      }
-      
-      ev.preventDefault();
-    },
-
-    keyDownHandler(ev) {
-      if ([27, 116].indexOf(ev.keyCode) != -1) {
-        ev.preventDefault();
-      }
     }
-  },
-  mounted() {
-    document.body.addEventListener('keyup', this.keyUpHandler);
-    document.body.addEventListener('keydown', this.keyDownHandler);
-  },
-  destroyed() {
-    document.body.removeEventListener('keyup', this.keyUpHandler);
-    document.body.addEventListener('keydown', this.keyDownHandler);
   }
-};
+}
 </script>
 
 <style lang="scss">
