@@ -7,9 +7,9 @@
       class="question-mark icon-help"
       tabindex="0"
       @focus="showTooltip"
-      @blur="hideTooltip"
-      @mouseenter="showTooltip"
-      @mouseleave="hideTooltip"/>
+      @blur="!isMouseOver ? hideTooltip : null"
+      @mouseenter="isMouseOver = true; showTooltip()"
+      @mouseleave="isMouseOver = false; hideTooltip()"/>
 </template>
 
 <script>
@@ -27,7 +27,8 @@ export default {
   data() {
     return {
       // Vue-элемент подсказки
-      tooltip: null
+      tooltip: null,
+      isMouseOver: false
     };
   },
   methods: {
