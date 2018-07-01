@@ -3,7 +3,13 @@
   Для работы данного компонента требуется иконочный шрифт с классом "icon-help"
 -->
 <template>
-  <div class="question-mark icon-help"/>
+  <div
+      class="question-mark icon-help"
+      tabindex="0"
+      @focus="showTooltip"
+      @blur="hideTooltip"
+      @mouseenter="showTooltip"
+      @mouseleave="hideTooltip"/>
 </template>
 
 <script>
@@ -24,8 +30,8 @@ export default {
       tooltip: null
     };
   },
-  mounted() {
-    this.$el.addEventListener('mouseenter', ev => {
+  methods: {
+    showTooltip() {
       if (this.tooltip) {
         return;
       }
@@ -37,11 +43,11 @@ export default {
         }
       });
       this.tooltip.mountToDocument();
-    });
-    this.$el.addEventListener('mouseleave', ev => {
+    },
+    hideTooltip() {
       this.tooltip.cancel();
       this.tooltip = null;
-    });
+    }
   }
 }
 </script>
@@ -50,6 +56,7 @@ export default {
 .question-mark {
   transition: .3s;
   display: inline-block;
+  outline: none;
   font-size: 18px;
   user-select: none;
   cursor: help;
