@@ -3,14 +3,21 @@
   <div class="filter-text-box">
     <div class="filter-text-box__text-line">
       <TextBox
+          class="filter-text-box__search-line"
+          :style="{padding: '5px'}"
           :hasBorder="true"
           :placeholder="placeholder"
           :value="value"
-          @input="$emit('input', $event)"
-          :style="{padding: '5px'}"/>
+          @input="$emit('input', $event)"/>
       <div
-          :class="['filter-text-box__button', { 'filter-text-box__button_open': isOpen }]"
-          @click="isOpen = !isOpen"/>
+          :class="[
+            'filter-text-box__button',
+            'icon-filter',
+            {'filter-text-box__button_open': isOpen}
+          ]"
+          tabindex="0"
+          @click="isOpen = !isOpen"
+          @keyup.enter.space="isOpen = !isOpen"/>
     </div>
     <transition
         name="slide"
@@ -60,20 +67,33 @@ export default {
   display: flex;
 }
 
+// Строка поиска
+.filter-text-box__search-line {
+  border-right: none !important;
+}
+
 // Кнопка фильтра
 .filter-text-box__button {
   display: flex;
   align-items: center;
+  justify-content: center;
+  
   width: 25px;
   padding: 3px;
+  
+  outline: none;
   border: 1px solid #ccc;
-  border-left: 0;
+
+  color: #555;
   user-select: none;
-  background: url(./filter.svg) no-repeat center center content-box border-box white;
+
+  &:focus {
+    color: #000;
+  }
   
   // Состояние кнопки, если панель открыта
   &_open {
-    background-color: rgba(0, 0, 0, .05);
+    background-color: #f0f0f0;
   }
 }
 

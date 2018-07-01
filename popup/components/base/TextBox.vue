@@ -1,12 +1,11 @@
 <!-- Тестовое поле -->
 <template>
   <input
-      class="text-box" 
+      :class="['text-box', {'text-box_has-border': hasBorder}]" 
       type="text"
       :placeholder="placeholder"
       :value="value"
-      @input="$emit('input', $event.target.value)"
-      :style="hasBorder ? {border: '1px solid #ccc'} : null">
+      @input="$emit('input', $event.target.value)">
 </template>
 
 <script>
@@ -54,6 +53,10 @@ export default {
 
   &:focus {
     border-bottom-color: #555 !important;
+  }
+
+  &_has-border {
+    border: 1px solid #ccc;
   }
 }
 </style>

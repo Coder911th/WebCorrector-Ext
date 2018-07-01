@@ -88,11 +88,13 @@ $text: #000;
   -moz-osx-font-smoothing: grayscale;
  }
  
+// icon-font
 .icon-pencil:before { content: '\e800'; }
 .icon-forward:before { content: '\e801'; }
 .icon-floppy:before { content: '\e802'; }
 .icon-trash-empty:before { content: '\e803'; }
 .icon-play:before { content: '\e804'; }
+.icon-filter:before { content: '\e805'; }
 .icon-help:before { content: '\f128'; }
 
 body {
