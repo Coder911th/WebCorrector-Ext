@@ -1,15 +1,30 @@
 <!-- Простая кнопка -->
 <template>
   <div
-      class="simple-button"
-      @click="$emit('click', $event)">
+      :class="['simple-button', {'simple-button_active': isActive}]"
+      tabindex="0"
+      @click="click"
+      @keydown.enter.space="isActive = true"
+      @keyup.enter.space="click"
+      @blur="isActive = false">
     <slot/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'SimpleButton'
+  name: 'SimpleButton',
+  data() {
+    return {
+      isActive: false
+    }
+  },
+  methods: {
+    click(ev) {
+      this.isActive = false;
+      this.$emit('click', ev);
+    }
+  }
 }
 </script>
 
@@ -21,6 +36,7 @@ export default {
   
   padding: 5px 15px;
 
+  outline: none;
   border: 1px solid rgb(33, 126, 74);
   border-radius: 4px;
 
@@ -33,10 +49,12 @@ export default {
   text-align: center;
   user-select: none;
   
+  &:focus,
   &:hover {
     background-color: rgb(55, 163, 111);
   }
 
+  &.simple-button_active,
   &:active {
     background-color: rgb(35, 153, 91);
   }
