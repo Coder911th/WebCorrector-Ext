@@ -2,7 +2,8 @@ import 'babel-polyfill';
 import 'JavaScript/ChromeStorageEmulator';
 import Vue from 'vue';
 import App from './App.vue';
-import {addSetStateMixin, addActionMixin} from 'JavaScript/VuexHelpers';
+import {setState, action} from 'JavaScript/VuexHelpers';
+import {vCreate} from 'JavaScript/VueHelpers';
 import Localization from 'JavaScript/Localization';
 import Store from 'Store/Store';
 
@@ -29,11 +30,12 @@ requireDirective.keys().forEach(fileName => {
   Vue.directive(directiveName, requireDirective(fileName).default);
 });
 
-// Добавляем метод для смены состояний Vuex-хранилища во все компоненты
-addSetStateMixin();
-
-// Добавляем псевдоним метода вызова действия Vuex-хранилища во все компоненты
-addActionMixin();
+// Расширяем прототип Vue
+Object.assign(Vue.prototype, {
+  vCreate,  // Создание компонентов из кода
+  setState, // Изменение состояния Vuex хранилища
+  action    // Выполнение действий Vuex хранилищ
+});
 
 (async function() {
   // Инициализируем глобальное хранилище состояний приложения

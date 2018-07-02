@@ -122,12 +122,10 @@ async function getStore() {
         }
   
         if (before.isNewScript) {
-  
           // Обновляем хранилище скриптов локально
           scripts.push(after);
         } else {
           if (await action('wasChanges', {before, after})) {
-  
             // Обновляем хранилище скриптов локально
             scripts.splice(scripts.findIndex(script => script.securityKey == before.securityKey), 1, after);
           } else {
@@ -151,7 +149,7 @@ async function getStore() {
   
       // Обновляет ключ безопасности скрпита
       updateSK({state, commit: setState}, script) {
-  
+
         // Обновляем ключ безопасности скрипта локально
         script.securityKey = state.nextSecurityKey;
   

@@ -120,7 +120,7 @@ export default {
 .context-menu {
   box-sizing: border-box;
   position: fixed;
-  padding: 3px 0;
+  padding: 0px 0;
   border: 1px solid #ccc;
   background: #fff;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, .25);
@@ -130,14 +130,13 @@ export default {
 .context-menu__item {
   transition: .3s;
   padding: 3px 10px;
-  border-bottom: 1px solid #ccc;
   
   &:last-child {
     border-bottom: none;
   }
 
   &:hover {
-    background: #f3f3f3;
+    background: #eee;
     cursor: pointer;
   }
 }

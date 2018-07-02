@@ -1,40 +1,27 @@
 /**** Хелперы для работы с Vuex-хранилищем ****/
 
-import Vue from 'vue';
 import {get, set} from 'JavaScript/BrowserExtensionHelpers';
 
 // Добавляет глобально всем компонентам метод для установки состояний
 // глобального хранилища через мутации
-export function addSetStateMixin() {
-  Vue.mixin({
-    methods: {
-      setState(name, value) {
-        if (this) {
-          // Метод вызывается в контексте компонента
-          this.$store.commit(name, value);
-        } else {
-          // Метод вызывается из вёрстки
-          $store.commit(name, value);
-        }
-      }
-    }
-  });
+export function setState(name, value) {
+  if (this) {
+    // Метод вызывается в контексте компонента
+    this.$store.commit(name, value);
+  } else {
+    // Метод вызывается из вёрстки
+    $store.commit(name, value);
+  }
 };
 
-export function addActionMixin() {
-  Vue.mixin({
-    methods: {
-      action(name, payload) {
-        if (this) {
-          // Метод вызывается в контексте компонента
-          return this.$store.dispatch(name, payload);
-        } else {
-          // Метод вызывается из вёрстки
-          return $store.dispatch(name, payload);
-        }
-      }
-    }
-  });
+export function action(name, payload) {
+  if (this) {
+    // Метод вызывается в контексте компонента
+    return this.$store.dispatch(name, payload);
+  } else {
+    // Метод вызывается из вёрстки
+    return $store.dispatch(name, payload);
+  }
 }
 
 // Задаёт двустороннее связывание свойства компонента с хранилищем

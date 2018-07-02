@@ -39,21 +39,31 @@ export default {
   methods: {
     escapeHTML,
     showContextMenu(ev) {
-      new Vue.options.components.ContextMenu({
-        propsData: {
-          x: ev.clientX,
-          y: ev.clientY,
-          items: [
-            {
-              text: 'Выполнить скрипт',
-              onClick: () =>
-                chrome.runtime.sendMessage({
-                  type: 'execScript',
-                  data: this.script.name
-                })
-            }
-          ]
+      let items = [{
+        text: 'Выполнить скрипт',
+        onClick: () => {
+          chrome.runtime.sendMessage({
+            type: 'execScript',
+            data: this.script.name
+          });
         }
+      }];
+
+      if (this.script.sites) {
+        items.push({
+          text: this.script.active 
+            ? 'Отключить автозагрузку'
+            : 'Включить автозагрузку',
+          onClick: () => {
+            this.action('toggleScriptActive', this.script);
+          }
+        });
+      }
+
+      this.vCreate('ContextMenu', {
+        x: ev.clientX,
+        y: ev.clientY,
+        items: items
       }).show();
     }
   }
