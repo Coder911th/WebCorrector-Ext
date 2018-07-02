@@ -46,8 +46,10 @@ export default {
       this.tooltip.mountToDocument();
     },
     hideTooltip() {
-      this.tooltip.cancel();
-      this.tooltip = null;
+      if (this.tooltip) {
+        this.tooltip.cancel();
+        this.tooltip = null;
+      }
     }
   }
 }
