@@ -120,7 +120,7 @@ export default {
 .context-menu {
   box-sizing: border-box;
   position: fixed;
-  padding: 0px 0;
+  padding: 0;
   border: 1px solid #ccc;
   background: #fff;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, .25);
