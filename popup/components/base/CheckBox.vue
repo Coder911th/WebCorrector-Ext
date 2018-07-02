@@ -53,8 +53,8 @@ export default {
   margin: 5px 0;
 
   &:focus {
-    .check-box__label {
-      text-decoration: underline;
+    .check-box__flag {
+      border-color: #999;
     }
   }
 
