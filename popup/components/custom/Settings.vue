@@ -131,13 +131,11 @@ export default {
 
         this.libAlias = '';
         this.libURL = '';
-        new Vue.options.components.Tooltip({
-          propsData: {
-            text: lc('Библиотека успешно добавлена'),
-            element: this.$refs.addLib.$el,
-            hideAfter: 15000
-          }
-        }).mountToDocument();
+        this.vCreate('Tooltip', {
+          text: lc('Библиотека успешно добавлена'),
+          element: this.$refs.addLib.$el,
+          hideAfter: 15000
+        });
       }
     },
 

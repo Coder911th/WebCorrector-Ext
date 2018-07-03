@@ -1,33 +1,29 @@
 // Хелпер для работы с модальными окнами
-import Vue from 'vue';
+import {vCreate} from 'JavaScript/VueHelpers';
 
 export default {
 
   // Окно с сообщением
   alert(caption, message) {
-    new Vue.options.components.Popup({
-      propsData: {
-        type: 'alert',
-        caption, message,
-        positiveButtonText: lc('Да'),
-        negativeButtonText: lc('Нет')
-      }
-    }).mountToDocument();
+    vCreate('Popup', {
+      type: 'alert',
+      caption, message,
+      positiveButtonText: lc('Да'),
+      negativeButtonText: lc('Нет')
+    });
   },
 
   // Окно с подтверждением
   confirm(caption, message) {
     return new Promise(resolve => {
-      new Vue.options.components.Popup({
-        propsData: {
-          type: 'confirm',
-          caption, message,
-          onPositive: () => resolve(true),
-          onNegative: () => resolve(false),
-          positiveButtonText: lc('Да'),
-          negativeButtonText: lc('Нет')
-        }
-      }).mountToDocument();
+      vCreate('Popup', {
+        type: 'confirm',
+        caption, message,
+        onPositive: () => resolve(true),
+        onNegative: () => resolve(false),
+        positiveButtonText: lc('Да'),
+        negativeButtonText: lc('Нет')
+      });
     });
   }
 };

@@ -1,5 +1,5 @@
 // Дикетива "Подсказка"
-import Vue from 'vue';
+import {vCreate} from 'JavaScript/VueHelpers';
 
 let
   // Массив элементов, у которых может быть всплывающая подсказка
@@ -17,16 +17,11 @@ document.addEventListener('mouseenter', ev => {
   if (el && el.tooltipDelayTimer == null && el.linkedTooltip == null && el.tooltipText) {
     el.tooltipDelayTimer = setTimeout(function() {
       // Выводим подсказку
-      let tooltip = new Vue.options.components.Tooltip({
-        propsData: {
-          text: el.tooltipText,
-          initX: mouseX,
-          initY: mouseY
-        }
+      el.linkedTooltip = vCreate('Tooltip', {
+        text: el.tooltipText,
+        initX: mouseX,
+        initY: mouseY
       });
-      
-      tooltip.mountToDocument();
-      el.linkedTooltip = tooltip;
       el.tooltipDelayTimer = null;
     } , 1000);
   }

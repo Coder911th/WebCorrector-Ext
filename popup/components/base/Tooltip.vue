@@ -136,17 +136,6 @@ export default {
     }
   },
   methods: {
-
-    // Монтирует элемент в документ
-    mountToDocument() {
-
-      // Монтируем элемент вне документа
-      this.$mount();
-
-      // Добавляем элемент на страницу
-      document.body.appendChild(this.$el);
-    },
-
     // Плавно закрываем подсказку
     cancel() {
       if (this.isVisible) {
@@ -174,7 +163,6 @@ export default {
     }
   },
   mounted() {
-
     // Вычисляем ширину подсказки
     this.$nextTick(() => {
       ({ width: this.width, height: this.height } = this.$el.getBoundingClientRect());

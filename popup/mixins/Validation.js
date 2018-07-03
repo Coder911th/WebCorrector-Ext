@@ -36,14 +36,11 @@ export default {
           if (this.$_validation_tooltip) {
             this.$_validation_tooltip.text = validationMessage;
           } else {
-            let elRect = this.$el.getBoundingClientRect();
-            new Vue.options.components.Tooltip({
-              propsData: {
-                text: validationMessage,
-                element: this.$el,
-                borderColor: '#bb0000'
-              }
-            }).mountToDocument();
+            this.vCreate('Tooltip', {
+              text: validationMessage,
+              element: this.$el,
+              borderColor: '#bb0000'
+            });
           }
         }
         return false;

@@ -95,12 +95,6 @@ export default {
         : this.y;
     }
   },
-  methods: {
-    show() {
-      this.$mount();
-      document.body.appendChild(this.$el);
-    }
-  },
   created() {
     let self = this;
     setTimeout(function findSizes() {

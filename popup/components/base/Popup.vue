@@ -86,17 +86,6 @@ export default {
     }
   },
   methods: {
-
-    // Монтирует popup тело документа
-    mountToDocument() {
-
-      // Монтируем элемент вне документа
-      this.$mount();
-
-      // Добавляем корневой элемент компонента в документ
-      document.body.appendChild(this.$el);
-    },
-
     // Уничтожает popup
     destroy() {
       document.body.removeChild(this.$el);

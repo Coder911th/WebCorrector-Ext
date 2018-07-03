@@ -37,13 +37,10 @@ export default {
         return;
       }
       let elRect = this.$el.getBoundingClientRect();
-      this.tooltip = new Vue.options.components.Tooltip({
-        propsData: {
-          text: this.text,
-          element: this.$el
-        }
+      this.tooltip = this.vCreate('Tooltip', {
+        text: this.text,
+        element: this.$el
       });
-      this.tooltip.mountToDocument();
     },
     hideTooltip() {
       if (this.tooltip) {

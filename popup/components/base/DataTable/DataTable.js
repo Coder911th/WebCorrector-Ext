@@ -143,13 +143,11 @@ export default {
           return;
         }
         // Выводим сообщение об ошибке
-        new Vue.options.components.Tooltip({
-          propsData: {
-            text: escapeHTML(errorMessage),
-            element: ev.target.parentNode,
-            borderColor: '#bb0000'
-          }
-        }).mountToDocument();
+        this.vCreate('Tooltip', {
+          text: escapeHTML(errorMessage),
+          element: ev.target.parentNode,
+          borderColor: '#bb0000'
+        });
       }
     },
     remove(ev) {
