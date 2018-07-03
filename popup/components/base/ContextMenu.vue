@@ -4,16 +4,23 @@
       appear
       name="fade">
     <div
+        ref="menu"
         class="context-menu"
         :style="{
-            top: `${computedY}px`,
-            left: `${computedX}px`
-          }">
+          top: `${computedY}px`,
+          left: `${computedX}px`
+        }"
+        tabindex="0"
+        @keyup.down="nextItem"
+        @keyup.up="prevItem">
       <div
-          class="context-menu__item"
+          :class="['context-menu__item', {
+            'context-menu__focus': index == focusIndex
+          }]"
           v-for="(item, index) of items"
           :key="index"
-          @click="item.onClick()">
+          @click="item.onClick()"
+          @mousemove="focusIndex = index">
         {{ item.text }}
       </div>
     </div>
@@ -45,8 +52,7 @@ document.addEventListener('wheel', destroyAllContextMenus);
 
 export default {
   name: 'ContextMenu',
-  props: {
-    
+  props: {  
     // Массив объектов со свойствами:
     // > text - текстовое описание элемента списка
     // > onClick - функция-обработчик клика по элементу списка
@@ -71,7 +77,8 @@ export default {
     return {
       createdDate: Date.now(),
       width: 0,
-      height: 0
+      height: 0,
+      focusIndex: null
     };
   },
   computed: {
@@ -95,6 +102,21 @@ export default {
         : this.y;
     }
   },
+  methods: {
+    hasFocus() {
+      return this.$refs.menu == document.activeElement;
+    },
+    nextItem() {
+      if (this.hasFocus()) {
+        this.focusIndex = (this.focusIndex + 1) % this.items.length;
+      }
+    },
+    prevItem() {
+      if (this.hasFocus()) {
+        this.focusIndex = (this.focusIndex + 1) % this.items.length;
+      }
+    }
+  },
   created() {
     let self = this;
     setTimeout(function findSizes() {
@@ -105,7 +127,7 @@ export default {
         self.width = sizes.width;
         self.height = sizes.height;
       }
-    }, 4)
+    }, 4);
   }
 }
 </script>
@@ -128,11 +150,11 @@ export default {
   &:last-child {
     border-bottom: none;
   }
+}
 
-  &:hover {
-    background: #eee;
-    cursor: pointer;
-  }
+.context-menu__focus {
+  background: #eee;
+  cursor: pointer;
 }
 
 // Анимация появления/исчезновения
