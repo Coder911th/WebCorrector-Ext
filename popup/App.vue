@@ -11,9 +11,11 @@
 </template>
 
 <script>
+import Window from 'Base/Window';
 import AboutScript from '@/AboutScript';
 
 export default {
+  extends: Window,
   components: {
     AboutScript
   },

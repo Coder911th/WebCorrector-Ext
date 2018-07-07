@@ -11,7 +11,8 @@ import Store from 'Store/Store';
 let requireComponent = require.context('./components/base', true, /\.vue$/);
 requireComponent.keys().forEach(fileName => {
   let baseComponentConfig = requireComponent(fileName).default;
-  Vue.component(baseComponentConfig.name, baseComponentConfig);
+  if (baseComponentConfig.name)
+    Vue.component(baseComponentConfig.name, baseComponentConfig);
 });
 
 // Объявляем глобально фильтры приложения
