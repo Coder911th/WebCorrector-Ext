@@ -15,8 +15,9 @@ document.addEventListener('keydown', ev => {
     if (ev.shiftKey) {
       // Переводим фокус назад
       activeWindow.focusTargetIndex = 
-        (activeWindow.focusTargetIndex - 1) 
-          % activeWindow.focusClosure.length;
+        activeWindow.focusTargetIndex - 1 < 0
+          ? activeWindow.focusClosure.length - 1
+          : activeWindow.focusTargetIndex - 1;
     } else {
       // Переводим фокус вперёд
       activeWindow.focusTargetIndex = 
