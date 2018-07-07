@@ -4,8 +4,8 @@
 -->
 <template>
   <div
+      v-focus
       class="question-mark icon-help"
-      tabindex="0"
       @focus="showTooltip"
       @blur="!isMouseOver ? hideTooltip() : null"
       @mouseenter="isMouseOver = true; showTooltip()"

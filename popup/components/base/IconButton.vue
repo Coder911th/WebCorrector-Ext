@@ -4,8 +4,8 @@
 
 <template>
   <div
+      v-focus
       class="icon-button"
-      tabindex="0"
       @click.capture="click"
       @mouseover="isHover = true"
       @mouseout="isHover = false"
@@ -86,7 +86,7 @@ export default {
   }
 }
 
-.icon-button:focus .icon-button__icon,
+.icon-button[focus] .icon-button__icon,
 .icon-button__icon_hover {
   transform: scale(1);
 }

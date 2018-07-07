@@ -5,13 +5,13 @@
 -->
 <template>
   <div
+      v-focus
       :class="[
         'check-box',
         {
           'check-box_checked': checked
         }
       ]"
-      v-focus
       @keyup.enter.space="toggle">
     <div
         class="check-box__flag"

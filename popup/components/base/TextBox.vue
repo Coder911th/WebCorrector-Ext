@@ -1,8 +1,9 @@
 <!-- Тестовое поле -->
 <template>
   <input
-      :class="['text-box', {'text-box_has-border': hasBorder}]" 
       type="text"
+      v-focus
+      :class="['text-box', {'text-box_has-border': hasBorder}]" 
       :placeholder="placeholder"
       :value="value"
       @input="$emit('input', $event.target.value)">
@@ -51,7 +52,7 @@ export default {
     border-bottom-color: #999;
   }
 
-  &:focus {
+  &[focus] {
     border-bottom-color: #555 !important;
   }
 

@@ -10,12 +10,12 @@
           :value="value"
           @input="$emit('input', $event)"/>
       <div
+          v-focus
           :class="[
             'filter-text-box__button',
             'icon-filter',
             {'filter-text-box__button_open': isOpen}
           ]"
-          tabindex="0"
           @click="isOpen = !isOpen"
           @keyup.enter.space="isOpen = !isOpen"/>
     </div>
@@ -87,7 +87,7 @@ export default {
   color: #555;
   user-select: none;
 
-  &:focus {
+  &[focus] {
     color: #000;
   }
   

@@ -1,8 +1,8 @@
 <!-- Простая кнопка -->
 <template>
   <div
+      v-focus
       :class="['simple-button', {'simple-button_active': isActive}]"
-      tabindex="0"
       @click="click"
       @keydown.enter.space="isActive = true"
       @keyup.enter.space="click"
@@ -49,7 +49,7 @@ export default {
   text-align: center;
   user-select: none;
   
-  &:focus,
+  &[focus],
   &:hover {
     background-color: rgb(55, 163, 111);
   }

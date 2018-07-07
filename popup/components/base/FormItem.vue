@@ -23,7 +23,7 @@ export default {
     activateLink() {
       let control = this.$refs.control.firstElementChild;
       if (control) {
-        control.focus();
+        control.vFocus();
       }
     }
   }
