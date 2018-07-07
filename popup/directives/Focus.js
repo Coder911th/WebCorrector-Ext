@@ -15,6 +15,7 @@
   можно накладывать стили с помощью псевдокласса :focus.
 */
 import Vue from 'vue';
+import WindowConfig from 'Base/Window';
 let Window = Vue.options.components.Window;
 
 // Фокусировка на DOM-элементе
@@ -31,24 +32,26 @@ Node.prototype.vFocus = function(addFocusClass) {
   }
 };
 
-export default function(el, binding, vnode) {
-  // Для совместимости с нативным фокусом
-  el.tabIndex = 0;
-  // Поиск ближайщего родительского окна
-  let currentElement = el;
-  while (currentElement) {
-    let window = currentElement.__vue__;
-    if (window) {
-      if (window instanceof Window) {
-        el.parentWindow = window;
-        // Нашли родительское окно
-        let index = window.focusClosure.push(el) - 1;
-        if (!window.focusTarget) {
-          window.focusTargetIndex = index;
+export default {
+  inserted: function(el, binding, vnode) {
+    // Для совместимости с нативным фокусом
+    el.tabIndex = 0;
+    // Поиск ближайщего родительского окна
+    let currentElement = el;
+    while (currentElement) {
+      let window = currentElement.__vue__;
+      if (window) {
+        if (window.isWindow) {
+          el.parentWindow = window;
+          // Нашли родительское окно
+          let index = window.focusClosure.push(el) - 1;
+          if (!window.focusTarget) {
+            window.focusTargetIndex = index;
+          }
+          break;
         }
-        break;
       }
+      currentElement = currentElement.parentElement;
     }
-    currentElement = currentElement.parentElement;
   }
 };

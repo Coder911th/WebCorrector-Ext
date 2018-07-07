@@ -11,7 +11,7 @@
           'check-box_checked': checked
         }
       ]"
-      tabindex="0"
+      v-focus
       @keyup.enter.space="toggle">
     <div
         class="check-box__flag"
@@ -52,7 +52,7 @@ export default {
   user-select: none;
   margin: 5px 0;
 
-  &:focus {
+  &[focus] {
     .check-box__flag {
       border-color: #999;
     }

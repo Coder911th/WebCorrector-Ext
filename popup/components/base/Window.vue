@@ -7,10 +7,11 @@ let activeWindow = null;
 
 // Перехват Tab
 document.addEventListener('keydown', ev => {
-  if (!activeWindow)
+  if (!activeWindow || !activeWindow.focusTarget)
     return;
   if (ev.keyCode == 9) { /* Tab */
     ev.preventDefault();
+    activeWindow.focusTarget.removeAttribute('focus');
     if (ev.shiftKey) {
       // Переводим фокус назад
       activeWindow.focusTargetIndex = 
@@ -22,7 +23,8 @@ document.addEventListener('keydown', ev => {
         (activeWindow.focusTargetIndex + 1) 
           % activeWindow.focusClosure.length;
     }
-    activeWindow.activateWindow(true);
+    activeWindow.focusTarget.setAttribute('focus', '');
+    activeWindow.focusTarget.focus();
   }
 });
 
@@ -33,6 +35,8 @@ document.addEventListener('mousedown', ev => {
     target = target.parentElement;
   if (target && target.parentWindow) {
     let window = target.parentWindow;
+    if (activeWindow.focusTarget)
+      activeWindow.focusTarget.removeAttribute('focus');
     window.focusTargetIndex = window.focusClosure.indexOf(target);
     window.activateWindow();
   }
@@ -44,7 +48,9 @@ export default {
       // Индекс активного элемента окна в focusClosure
       focusTargetIndex: null,
       // Замыкание из фокусируемых элементов окна
-      focusClosure: []
+      focusClosure: [],
+      // Метка окна
+      isWindow: true
     };
   },
   computed: {
@@ -61,15 +67,15 @@ export default {
     // Делет текущее окно активным
     activateWindow(addFocusClass) {
       if (activeWindow.focusTarget) {
-        activeWindow.focusTarget.classList.remove('focus');
+        activeWindow.focusTarget.removeAttribute('focus');
       }
       if (!this.isActiveWindow()) {
-        activeWindow.classList.remove('window_active');
+        activeWindow.removeAttribute('active-window');
         activeWindow = this;
-        this.classList.add('window_active');
+        this.setAttribute('active-window');
       }
       if (this.focusTarget) {
-        addFocusClass && this.focusTarget.classList.add('focus');
+        addFocusClass && this.focusTarget.setAttribute('focus');
         this.focusTarget.focus();
       }
     }
