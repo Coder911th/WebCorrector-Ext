@@ -52,7 +52,7 @@ export default {
     border-bottom-color: #999;
   }
 
-  &[focus] {
+  &:focus {
     border-bottom-color: #555 !important;
   }
 
