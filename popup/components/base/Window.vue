@@ -43,6 +43,7 @@ document.addEventListener('mousedown', ev => {
     window.focusTargetIndex = window.focusClosure.indexOf(target);
     window.activateWindow();
   }
+  
   if (oldFocusTarget)
     oldFocusTarget.removeAttribute('focus');
 });
