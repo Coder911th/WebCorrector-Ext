@@ -67,3 +67,8 @@ Object.assign(Vue.prototype, {
 if (process.env.NODE_ENV != 'development') {
   document.addEventListener('contextmenu', ev => ev.preventDefault());
 }
+
+// Выносим в глобальную область Vue в режиме отладки
+if (process.env.NODE_ENV == 'development') {
+  window.Vue = Vue;
+}
