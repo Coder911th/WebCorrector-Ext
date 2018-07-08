@@ -3,9 +3,8 @@
 <template>
   <div id="app">
     <Tabs
-      :initialIndex="$store.state.activeTab"
-      :items="tabs"
-      @onTabChanged="setState('activeTab', $event)"/>
+      v-model="activeTab"
+      :items="tabs"/>
     <AboutScript/>
   </div>
 </template>
@@ -14,6 +13,7 @@
 import Vue from 'vue';
 import Window from 'Base/Window';
 import AboutScript from '@/AboutScript';
+import {vModel} from 'JavaScript/VuexHelpers';
 
 export default {
   extends: Window,
@@ -21,6 +21,9 @@ export default {
     AboutScript
   },
   computed: {
+    ...vModel([
+      'activeTab'
+    ]),
     tabs: () => [
       {
         key: 1,

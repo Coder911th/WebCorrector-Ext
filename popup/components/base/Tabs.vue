@@ -1,22 +1,26 @@
 <!-- Контейнер с вкладками, переключающий содержимое при выборе вклаки -->
 
 <template>
-  <div class="tabs">
+  <div
+      v-focus
+      class="tabs"
+      @keyup.left="prevTab"
+      @keyup.right="nextTab">
     <div class="tabs__menu">
       <div
           class="tabs__button"
-          :class="{ 'tabs__button_current': index == currentIndex }"
+          :class="{ 'tabs__button_current': index == selectedIndex }"
           v-for="(tab, index) of items" 
           :key="tab.caption"
-          @click="currentIndex = index; $emit('onTabChanged', index)">
+          @click="$emit('change', index)">
         {{ tab.caption }}
       </div>
     </div>
     <keep-alive>
       <component
           class="tabs__content"
-          :is="items[currentIndex].component"
-          :key="items[currentIndex].key"/>
+          :is="items[selectedIndex].component"
+          :key="items[selectedIndex].key"/>
     </keep-alive>
   </div>
 </template>
@@ -24,10 +28,14 @@
 <script>
 export default {
   name: 'Tabs',
+  model: {
+    prop: 'selectedIndex',
+    event: 'change'
+  },
   props: {
-    initialIndex: {
+    selectedIndex: {
       type: Number,
-      default: 0
+      required: true
     },
     items: {
       type: Array,
@@ -42,10 +50,16 @@ export default {
       }
     }
   },
-  data() {
-    return {
-      currentIndex: this.initialIndex
-    };
+  methods: {
+    nextTab() {
+      this.$emit('change', (this.selectedIndex + 1) % this.items.length);
+    },
+    prevTab() {
+      this.$emit('change',
+        this.selectedIndex - 1 < 0
+          ? this.items.length - 1
+          : this.selectedIndex - 1);
+    }
   }
 }
 </script>
@@ -57,6 +71,11 @@ $bd: #ccc;
   height: 100%;
   display: flex;
   flex-direction: column;
+  outline: none;
+
+  &[focus] .tabs__button_current {
+    text-shadow: 1px 0 0 #000;
+  }
 }
 
 /* Меню с названием вкладок */
