@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import Window from 'Base/Window';
 import AboutScript from '@/AboutScript';
 
@@ -37,6 +38,9 @@ export default {
         component: require('@/Settings').default
       }
     ]
+  },
+  created() {
+    Vue.prototype.$mainWindow = this;
   }
 };
 </script>

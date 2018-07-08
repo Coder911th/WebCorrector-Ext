@@ -2,6 +2,9 @@
   Абстрактное окно.
 -->
 <script>
+import Vue from 'vue';
+import {vCreate} from 'JavaScript/VueHelpers';
+
 // Активное окно
 let activeWindow = null;
 
@@ -49,6 +52,12 @@ document.addEventListener('mousedown', ev => {
 });
 
 export default {
+  props: {
+    opener: {
+      type: Vue,
+      default: null
+    }
+  },
   data() {
     return {
       // Индекс активного элемента окна в focusClosure
@@ -70,20 +79,26 @@ export default {
     isActiveWindow() {
       return activeWindow == this;
     },
+
     // Делет текущее окно активным
     activateWindow(addFocusClass) {
       if (activeWindow.focusTarget) {
         activeWindow.focusTarget.removeAttribute('focus');
       }
       if (!this.isActiveWindow()) {
-        activeWindow.removeAttribute('active-window');
+        activeWindow.$el.removeAttribute('active-window');
         activeWindow = this;
-        this.setAttribute('active-window');
+        this.$el.setAttribute('active-window', '');
       }
       if (this.focusTarget) {
         addFocusClass && this.focusTarget.setAttribute('focus');
         this.focusTarget.focus();
       }
+    },
+
+    // Открывает дочернее окно
+    openChildWindow(name, props) {
+      vCreate(name, props).opener = this;
     }
   },
   mounted() {

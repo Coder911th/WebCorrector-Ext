@@ -4,13 +4,13 @@
       appear
       name="fade">
     <div
+        v-focus
         ref="menu"
         class="context-menu"
         :style="{
           top: `${computedY}px`,
           left: `${computedX}px`
         }"
-        tabindex="0"
         @keyup.down="nextItem"
         @keyup.up="prevItem">
       <div
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import Window from 'Base/Window';
 
 function destroyAllContextMenus() {
   Array.prototype.forEach.call(document.getElementsByClassName('context-menu'), menu => {
@@ -52,6 +53,7 @@ document.addEventListener('wheel', destroyAllContextMenus);
 
 export default {
   name: 'ContextMenu',
+  extends: Window,
   props: {  
     // Массив объектов со свойствами:
     // > text - текстовое описание элемента списка
@@ -117,7 +119,7 @@ export default {
       }
     }
   },
-  created() {
+  mounted() {
     let self = this;
     setTimeout(function findSizes() {
       if (!self.$el) {
@@ -128,6 +130,8 @@ export default {
         self.height = sizes.height;
       }
     }, 4);
+
+    this.$nextTick(this.activateWindow);
   }
 }
 </script>
@@ -140,6 +144,7 @@ export default {
   border: 1px solid #ccc;
   background: #fff;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, .25);
+  outline: none;
   user-select: none;
 }
 

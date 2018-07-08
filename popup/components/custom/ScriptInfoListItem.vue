@@ -1,6 +1,7 @@
 <!-- Элемент списка скриптов -->
 <template>
   <div
+      v-focus
       :class="[
         'script-info-list-item',
         {
@@ -9,6 +10,7 @@
         }
       ]"
       @click="action('showScriptInfo', script);"
+      @keyup.space.enter="action('showScriptInfo', script);"
       @contextmenu.prevent="showContextMenu">
     <div class="script-info-list-item__info">
       <div
@@ -82,8 +84,10 @@ export default {
   
   padding: 5px;
   border-bottom: 1px solid #ccc;
+  outline: none;
 
-  &:hover .script-info-list-item__name {
+  &:hover .script-info-list-item__name,
+  &[focus] .script-info-list-item__name {
     text-shadow: 1px 0 0 #000;
   }
 
