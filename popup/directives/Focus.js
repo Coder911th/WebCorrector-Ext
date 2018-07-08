@@ -37,6 +37,7 @@ function findWindow(node, callback) {
 // Налюдаем за добавлением/удалением фокусируемых элементов
 new MutationObserver(function(mutations) {
   let windows = new Map();
+  
   mutations.forEach(mutation => {
     // Смотрим добавленные узлы
     each.call(mutation.addedNodes, node => {
