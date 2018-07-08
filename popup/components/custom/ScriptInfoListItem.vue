@@ -66,7 +66,7 @@ export default {
         x: ev.clientX,
         y: ev.clientY,
         items: items
-      });console.log(ev)
+      });
     }
   }
 }
