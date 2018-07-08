@@ -32,15 +32,19 @@ document.addEventListener('keydown', ev => {
 // Активация элемента при клике
 document.addEventListener('mousedown', ev => {
   let target = ev.target;
+  
   while (target && target.tabIndex < 0)
     target = target.parentElement;
+  
+  let oldFocusTarget = activeWindow.focusTarget;
+
   if (target && target.parentWindow) {
     let window = target.parentWindow;
-    if (activeWindow.focusTarget)
-      activeWindow.focusTarget.removeAttribute('focus');
     window.focusTargetIndex = window.focusClosure.indexOf(target);
     window.activateWindow();
   }
+  if (oldFocusTarget)
+    oldFocusTarget.removeAttribute('focus');
 });
 
 export default {
