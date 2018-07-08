@@ -2,7 +2,9 @@
 <template>
   <div
       class="scroll-area"
-      @wheel="wheelScroll">
+      @wheel="wheelScroll"
+      @keydown.up.capture.stop="scroll(0, -1)"
+      @keydown.down.capture.stop="scroll(0, 1)">
     <div
         class="scroll-area__content"
         :style="{
