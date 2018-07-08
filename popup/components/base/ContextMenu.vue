@@ -83,7 +83,7 @@ export default {
       createdDate: Date.now(),
       width: 0,
       height: 0,
-      focusIndex: null
+      focusIndex: -1
     };
   },
   computed: {
@@ -118,7 +118,9 @@ export default {
     },
     prevItem() {
       if (this.hasFocus()) {
-        this.focusIndex = (this.focusIndex + 1) % this.items.length;
+        this.focusIndex = this.focusIndex - 1  < 0
+          ? this.items.length - 1
+          : this.focusIndex - 1;
       }
     },
     destroyAllContextMenus: destroyAllContextMenus
