@@ -1,6 +1,9 @@
 <!-- Переключатель с именованными кнопками -->
 <template>
-  <div class="named-switch">
+  <div
+      v-focus
+      class="named-switch"
+      @keyup.enter.space="toggle">
     <div
         :class="[
           'named-switch__button',
@@ -51,6 +54,11 @@ export default {
     switchToRight() {
       if (this.active != this.rightText)
         this.$emit('change', this.rightText);
+    },
+    toggle() {
+      this.active == this.leftText
+        ? this.switchToRight()
+        : this.switchToLeft();
     }
   }
 }
@@ -60,7 +68,12 @@ export default {
 .named-switch {
   display: inline-flex;
   background: #fefefe;
+  outline: none;
   user-select: none;
+
+  &[focus] .named-switch__button {
+    border-color: #555;
+  }
 }
 
 .named-switch__button {
