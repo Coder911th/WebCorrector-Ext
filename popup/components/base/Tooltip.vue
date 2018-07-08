@@ -198,6 +198,10 @@ function hideAllTooltips() {
 */
 document.addEventListener('click', hideAllTooltips);
 document.addEventListener('wheel', hideAllTooltips);
+document.addEventListener('keyup', ev => {
+  if (ev.keyCode == 27) /* Esc */
+    hideAllTooltips();
+});
 </script>
 
 <style lang="scss">
