@@ -62,11 +62,11 @@ export default {
         });
       }
 
-      this.vCreate('ContextMenu', {
+      this.$mainWindow.openChildWindow('ContextMenu', {
         x: ev.clientX,
         y: ev.clientY,
         items: items
-      });
+      });console.log(ev)
     }
   }
 }

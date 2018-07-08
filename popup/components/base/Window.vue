@@ -4,6 +4,7 @@
 <script>
 import Vue from 'vue';
 import {vCreate} from 'JavaScript/VueHelpers';
+import Window from 'Base/Window';
 
 // Активное окно
 let activeWindow = null;
@@ -54,7 +55,7 @@ document.addEventListener('mousedown', ev => {
 export default {
   props: {
     opener: {
-      type: Vue,
+      type: Window,
       default: null
     }
   },
@@ -98,13 +99,20 @@ export default {
 
     // Открывает дочернее окно
     openChildWindow(name, props) {
-      vCreate(name, props).opener = this;
+      vCreate(name, Object.assign(props, {
+        opener: this
+      }));
     }
   },
   mounted() {
     if (!activeWindow) {
       activeWindow = this;
       activeWindow.activateWindow();
+    }
+  },
+  destroyed() {
+    if (this.opener) {
+      this.opener.activateWindow();
     }
   }
 }

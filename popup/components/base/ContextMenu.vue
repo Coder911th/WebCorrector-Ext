@@ -12,7 +12,9 @@
           left: `${computedX}px`
         }"
         @keyup.down="nextItem"
-        @keyup.up="prevItem">
+        @keyup.up="prevItem"
+        @keyup.esc="destroyAllContextMenus"
+        @keyup.enter.space="items[focusIndex].onClick(); destroyAllContextMenus()">
       <div
           :class="['context-menu__item', {
             'context-menu__focus': index == focusIndex
@@ -43,6 +45,7 @@ function destroyAllContextMenus() {
 
     if (Date.now() - vm.createdDate > 300) {
       menu.parentNode.removeChild(menu);
+      vm.$destroy();
     }
   });
 }
@@ -117,7 +120,8 @@ export default {
       if (this.hasFocus()) {
         this.focusIndex = (this.focusIndex + 1) % this.items.length;
       }
-    }
+    },
+    destroyAllContextMenus: destroyAllContextMenus
   },
   mounted() {
     let self = this;
@@ -130,7 +134,6 @@ export default {
         self.height = sizes.height;
       }
     }, 4);
-
     this.$nextTick(this.activateWindow);
   }
 }
