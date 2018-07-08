@@ -134,7 +134,6 @@ export default {
         self.height = sizes.height;
       }
     }, 4);
-    this.$nextTick(this.activateWindow);
   }
 }
 </script>

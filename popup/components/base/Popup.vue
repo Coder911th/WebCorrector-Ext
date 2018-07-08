@@ -11,6 +11,7 @@
       
       <SimpleButton
           v-if="type == 'alert'"
+          v-focus
           @click="destroy()">
         OK
       </SimpleButton>
@@ -18,12 +19,14 @@
       <div>
         <SimpleButton
             v-if="type == 'confirm'"
+            v-focus
             @click="onPositive();destroy()">
           {{ positiveButtonText }}
         </SimpleButton>
 
         <SimpleButton
             v-if="type == 'confirm'"
+            v-focus
             @click="onNegative();destroy()"
             style="margin-left: 10px">
           {{ negativeButtonText }}
@@ -34,8 +37,11 @@
 </template>
 
 <script>
+import Window from 'Base/Window';
+
 export default {
   name: 'Popup',
+  extends: Window,
   props: {
 
     // Тип модального окна

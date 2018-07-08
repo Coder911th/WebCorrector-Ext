@@ -8,6 +8,11 @@ import Window from 'Base/Window';
 
 // Активное окно
 let activeWindow = null;
+Object.defineProperty(Vue.prototype, '$activeWindow', {
+  get() {
+    return activeWindow;
+  }
+});
 
 // Перехват Tab
 document.addEventListener('keydown', ev => {
@@ -92,16 +97,22 @@ export default {
         this.$el.setAttribute('active-window', '');
       }
       if (this.focusTarget) {
-        addFocusClass && this.focusTarget.setAttribute('focus');
+        addFocusClass && this.focusTarget.setAttribute('focus', '');
         this.focusTarget.focus();
       }
     },
 
     // Открывает дочернее окно
-    openChildWindow(name, props) {
-      vCreate(name, Object.assign(props, {
+    openChildWindow(name, props, addFocusClass) {
+      if (Vue.options.components[name].options.data().isWindow !== true)
+        return console.warn(`Попытка открыть дочернее окно "${name}", ` +
+          'которое не является экземпляром класса Window!');
+      
+      let window = vCreate(name, Object.assign(props, {
         opener: this
       }));
+
+      window.$nextTick(() => window.activateWindow(addFocusClass));
     }
   },
   mounted() {
