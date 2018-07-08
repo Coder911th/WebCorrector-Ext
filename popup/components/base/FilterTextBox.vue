@@ -88,6 +88,7 @@ export default {
   user-select: none;
 
   &[focus] {
+    box-shadow: inset 0 0 3px rgba(#000, .25);
     color: #000;
   }
   
