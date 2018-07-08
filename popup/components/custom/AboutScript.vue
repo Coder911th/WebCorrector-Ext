@@ -106,8 +106,7 @@
           <Spoiler
               class="about-script__line"
               :caption="'Подключаемые библиотеки'|lc"
-              :initOpen="isOpenSpoiler"
-              @toggle="setState('isOpenSpoiler', !isOpenSpoiler)">
+              v-model="isOpenSpoiler">
             <DataTable
                 class="about-script__table"
                 v-model="libs"

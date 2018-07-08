@@ -1,6 +1,16 @@
 <!-- Спойлер скрывающий и показывающий вложенную информацию по клику -->
 <template>
-  <div :class="['spoiler', {'spoiler_collapsed': !isOpen}]">
+  <div
+      v-focus
+      :class="[
+        'spoiler', 
+        {
+          'spoiler_collapsed': !isOpen
+        }
+      ]"
+      @keyup.enter.space="toggle"
+      @keyup.right="show"
+      @keyup.left="hide">
     <div
         class="spoiler__caption"
         @click="toggle">{{ caption }}</div>
@@ -15,28 +25,37 @@
 <script>
 export default {
   name: 'Spoiler',
+  model: {
+    prop: 'isOpen',
+    event: 'toggle'
+  },
   props: {
     // Изначально спойлер открыт?
-    initOpen: {
+    isOpen: {
       type: Boolean,
       default: false
     },
+    
     // Заголовок спойлера
     caption: {
       type: String,
       required: true
     }
   },
-  data() {
-    return {
-      isOpen: this.initOpen
-    };
-  },
   // Методы для усправление элементом из вне
   methods: {
+    hide() {
+      if (this.isOpen) {
+        this.$emit('toggle', false);
+      }
+    },
+    show() {
+      if (!this.isOpen) {
+        this.$emit('toggle', true);
+      }
+    },
     toggle() {
-      this.$emit('toggle');
-      this.isOpen = !this.isOpen;
+      this.$emit('toggle', !this.isOpen);
     }
   }
 }
@@ -45,7 +64,12 @@ export default {
 <style lang="scss">
 .spoiler {
   border: 1px solid rgb(196, 196, 196);
+  outline: none;
   overflow: hidden;
+
+  &[focus] .spoiler__caption {
+    text-decoration: underline;
+  }
 }
 
 // Открытый спойлер
