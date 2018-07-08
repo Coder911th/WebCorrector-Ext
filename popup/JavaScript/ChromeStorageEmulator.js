@@ -2,7 +2,7 @@ if (process.env.NODE_ENV == 'development') {
   var storage = {
     extension: true,
     version: 'v1.2.0 test',
-    nextSecurityKey: 4,
+    nextSecurityKey: 11,
     scripts: [
       {
         name: "Reloger",
@@ -27,6 +27,62 @@ if (process.env.NODE_ENV == 'development') {
         libs: [],
         code: "// Some code",
         securityKey: 3
+      },
+      {
+        name: "Hello World",
+        sites: "",
+        active: true,
+        libs: [],
+        code: "// Some code",
+        securityKey: 4
+      },
+      {
+        name: "<i>italic</i>",
+        sites: "<i>123</i>",
+        active: true,
+        libs: [],
+        code: "// Some code",
+        securityKey: 5
+      },
+      {
+        name: "Coooooode",
+        sites: "",
+        active: true,
+        libs: [],
+        code: "// Some code",
+        securityKey: 6
+      },
+      {
+        name: "Super-Script",
+        sites: "",
+        active: true,
+        libs: [],
+        code: "// Some code",
+        securityKey: 7
+      },
+      {
+        name: "123",
+        sites: "",
+        active: true,
+        libs: [],
+        code: "// Some code",
+        securityKey: 8
+      },
+      {
+        name: "321",
+        sites: "",
+        active: true,
+        libs: [],
+        code: "// Some code",
+        securityKey: 9
+      },
+      {
+        name: "ooOOooOo",
+        sites: "",
+        active: true,
+        libs: [],
+        code: "// Some code",
+        securityKey: 10
       }
     ],
     libs: [
