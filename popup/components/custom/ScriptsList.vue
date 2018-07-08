@@ -51,7 +51,7 @@ export default {
     },
     emptyListMessage: {
       type: String,
-      default: lc('Не обнаружено ни одного скрипта')
+      required: true
     }
   },
   computed: {

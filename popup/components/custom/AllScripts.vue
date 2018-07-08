@@ -1,7 +1,9 @@
 <!-- Компонент со списком всех скриптов -->
 <template>
   <div class="all-scripts">
-    <ScriptsList :items="scripts"/>
+    <ScriptsList
+        :items="scripts"
+        :emptyListMessage="emptyListMessage"/>
   </div>
 </template>
 
@@ -16,6 +18,9 @@ export default {
   computed: {
     scripts() {;
       return this.$store.state.scripts;
+    },
+    emptyListMessage() {
+      return lc('Не обнаружено ни одного скрипта');
     }
   }
 }
