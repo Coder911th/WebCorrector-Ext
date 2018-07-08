@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       // Индекс активного элемента окна в focusClosure
-      focusTargetIndex: null,
+      focusTargetIndex: 0,
       // Замыкание из фокусируемых элементов окна
       focusClosure: [],
       // Метка окна
