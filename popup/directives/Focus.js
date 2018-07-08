@@ -24,14 +24,30 @@ function findWindow(node, callback) {
   while (currentElement) {
     let vue = currentElement.__vue__;
     if (vue) {
-      if (vue.isWindow) {
-        node.parentWindow = vue;
-        callback(vue);
-        break;
-      }
+      do {
+        if (vue.isWindow) {
+          node.parentWindow = vue;
+          callback(vue);
+          return;
+        }
+      } while (vue = vue.$parent);
+      return;
     }
     currentElement = currentElement.parentElement;
   }
+}
+
+// Возвращает итератор по всем узлам, на которых можно фокусироваться,
+// в поддереве root
+function getIterator(root, condition) {
+  return document.createNodeIterator(
+    root,
+    NodeFilter.SHOW_ELEMENT,
+    node =>
+      condition(node)
+        ? NodeFilter.FILTER_ACCEPT
+        : NodeFilter.FILTER_SKIP
+  );
 }
 
 // Налюдаем за добавлением/удалением фокусируемых элементов
@@ -42,14 +58,8 @@ new MutationObserver(function(mutations) {
     // Смотрим добавленные узлы
     each.call(mutation.addedNodes, node => {
       // Перебираем поддерево добавленного элемента
-      let iterator = document.createNodeIterator(
-        node,
-        NodeFilter.SHOW_ELEMENT,
-        node =>
-          node.canBeFocused === true
-            ? NodeFilter.FILTER_ACCEPT
-            : NodeFilter.FILTER_SKIP
-      );
+      let iterator = getIterator(node,
+        node => node.canBeFocused === true);
 
       while (node = iterator.nextNode()) {
         findWindow(node, window => {
@@ -68,14 +78,8 @@ new MutationObserver(function(mutations) {
     // Смотрим удаленные узлы
     each.call(mutation.removedNodes, node => {
       // Перебираем поддерево удаленного элемента
-      let iterator = document.createNodeIterator(
-        node,
-        NodeFilter.SHOW_ELEMENT,
-        node =>
-          node.canBeFocused === true && node.parentWindow
-            ? NodeFilter.FILTER_ACCEPT
-            : NodeFilter.FILTER_SKIP
-      );
+      let iterator = getIterator(node, node =>
+        node.canBeFocused === true && node.parentWindow);
 
       while (node = iterator.nextNode()) {
         if (!windows.has(node.parentWindow)) {
@@ -136,17 +140,11 @@ Node.prototype.vFocus = function(addFocusClass) {
 };
 
 export default {
-  inserted(el) {
+  bind(el, binding, vnode) {
     // Для совместимости с нативным фокусом
     el.tabIndex = 0;
 
     // Устанавливаем метку фокусируемого элемента
     el.canBeFocused = true;
-
-    // Добавляем элемент в родительское окно, если
-    // он изначально находится в вёрстке
-    findWindow(el, window => {
-      window.focusClosure.push(el);
-    });
   }
 };
