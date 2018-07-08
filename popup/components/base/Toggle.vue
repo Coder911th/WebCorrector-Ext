@@ -1,8 +1,10 @@
 <!-- Переключатель между состояниями включен/выключен -->
 <template>
   <div
+      v-focus
       class="toggle"
-      @click="$emit('change', !checked)">
+      @click="$emit('change', !checked)"
+      @keyup.enter.space="$emit('change', !checked)">
     <div :class="['toggle__button', {'toggle__button_on': checked}]"/>
     <div :class="['toggle__label', 'toggle__label_on']">ON</div>
     <div :class="['toggle__label', 'toggle__label_off']">OFF</div>
@@ -33,17 +35,19 @@ export default {
   height: 22px;
   width: 45px;
   
+  outline: none;
   border: 1px solid #999;
-  border-radius: 15px;
+  border-radius: 10px;
   background: #333;
 
   user-select: none;
-}
 
-.toggle:hover .toggle__button {
-  background: rgb(180, 9, 9);
-  &_on {
-    background: rgb(29, 138, 29);
+  &[focus] .toggle__button,
+  &:hover .toggle__button {
+    background: rgb(180, 9, 9);
+    &_on {
+      background: rgb(29, 138, 29);
+    }
   }
 }
 
@@ -58,7 +62,7 @@ export default {
   width: 22px;
   
   border: 1px solid #999;
-  border-radius: 15px;
+  border-radius: 10px;
   background: rgb(128, 2, 2);
 
   &_on {
@@ -91,7 +95,7 @@ export default {
   font-size: 9px;
 
   &_on {
-    left: 4.65px;
+    left: 4px;
   }
   &_off {
     right: 3px;
