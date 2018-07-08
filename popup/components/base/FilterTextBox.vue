@@ -25,7 +25,7 @@
         @after-enter="onToggleFilterPanel">
       <div
           class="filter-text-box__panel"
-          v-show="isOpen">
+          v-if="isOpen">
         <slot/>
       </div>
     </transition>
