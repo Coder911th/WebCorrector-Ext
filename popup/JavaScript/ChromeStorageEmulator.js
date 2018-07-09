@@ -89,6 +89,14 @@ if (process.env.NODE_ENV == 'development') {
       {
         alias: "jQuery 3.3.1",
         url: "https://code.jquery.com/jquery-3.3.1.js"
+      },
+      {
+        alias: "Velocity",
+        url: "https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.5/velocity.js"
+      },
+      {
+        alias: "Lodash",
+        url: "https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"
       }
     ],
     lang: 'EN',	
