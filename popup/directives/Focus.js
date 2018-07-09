@@ -19,7 +19,7 @@
 let each = Array.prototype.forEach;
 
 // Поиск ближайшего родительского окна элемента
-function findWindow(node, callback) {
+function findWindow(node) {
   let currentElement = node;
   while (currentElement) {
     let vue = currentElement.__vue__;
@@ -27,11 +27,10 @@ function findWindow(node, callback) {
       do {
         if (vue.isWindow) {
           node.parentWindow = vue;
-          callback(vue);
-          return;
+          return vue;
         }
       } while (vue = vue.$parent);
-      return;
+      return null;
     }
     currentElement = currentElement.parentElement;
   }
@@ -62,16 +61,17 @@ new MutationObserver(function(mutations) {
         node => node.canBeFocused === true);
 
       while (node = iterator.nextNode()) {
-        findWindow(node, window => {
-          if (!windows.has(window)) {
-            windows.set(window, {
-              add: [node],
-              remove: []
-            });
-          } else {
-            windows.get(window).add.push(node);
-          }
-        });
+        let window = findWindow(node);
+        if (!window)
+          continue;
+        if (!windows.has(window)) {
+          windows.set(window, {
+            add: [node],
+            remove: []
+          });
+        } else {
+          windows.get(window).add.push(node);
+        }
       }
     });
 
@@ -137,6 +137,15 @@ Node.prototype.vFocus = function(addFocusClass) {
     window.focusTargetIndex = window.focusClosure.indexOf(this);
     window.activateWindow(focusClass);
   }
+};
+
+Node.prototype.hasFocus = function() {
+  let window = findWindow(this);
+  if (!window) {
+    console.warn('Не найдено родительское окно!', this);
+    return false;
+  }
+  return window.$activeWindow.focusTarget === this;
 };
 
 export default {

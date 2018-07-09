@@ -51,14 +51,16 @@ export default {
     }
   },
   methods: {
-    nextTab() {
-      this.$emit('change', (this.selectedIndex + 1) % this.items.length);
+    nextTab(ev) {
+      if (ev.target.classList.contains('tabs'))
+        this.$emit('change', (this.selectedIndex + 1) % this.items.length);
     },
-    prevTab() {
-      this.$emit('change',
-        this.selectedIndex - 1 < 0
-          ? this.items.length - 1
-          : this.selectedIndex - 1);
+    prevTab(ev) {
+      if (ev.target.classList.contains('tabs'))
+        this.$emit('change',
+          this.selectedIndex - 1 < 0
+            ? this.items.length - 1
+            : this.selectedIndex - 1);
     }
   }
 }

@@ -8,6 +8,8 @@ import Window from 'Base/Window';
 
 // Активное окно
 let activeWindow = null;
+
+// Геттер активного окна
 Object.defineProperty(Vue.prototype, '$activeWindow', {
   get() {
     return activeWindow;
