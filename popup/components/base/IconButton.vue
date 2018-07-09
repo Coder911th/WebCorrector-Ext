@@ -57,11 +57,6 @@ export default {
     }
   },
   methods: {
-    // Анимирует нажатие на кнопку
-    press() {
-      // this.scaleStyle = {transform: 'scale(.8)'};
-      // setTimeout(() => this.scaleStyle = {}, 100);
-    },
     click() {
       this.isActive = false;
       this.$emit('click', {target: this.$el});
