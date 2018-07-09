@@ -118,7 +118,7 @@ new MutationObserver(function(mutations) {
         return;
       } 
     }
-    window.focusTargetIndex = 0;
+    window.focusTargetIndex = -1;
   });
 }).observe(document.body, {
   childList: true,

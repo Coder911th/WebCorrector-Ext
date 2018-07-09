@@ -16,11 +16,12 @@ Object.defineProperty(Vue.prototype, '$activeWindow', {
 
 // Перехват Tab
 document.addEventListener('keydown', ev => {
-  if (!activeWindow || !activeWindow.focusTarget)
+  if (!activeWindow)
     return;
   if (ev.keyCode == 9) { /* Tab */
     ev.preventDefault();
-    activeWindow.focusTarget.removeAttribute('focus');
+    if (activeWindow.focusTarget)
+      activeWindow.focusTarget.removeAttribute('focus');
     if (ev.shiftKey) {
       // Переводим фокус назад
       activeWindow.focusTargetIndex = 
@@ -67,7 +68,7 @@ export default {
   data() {
     return {
       // Индекс активного элемента окна в focusClosure
-      focusTargetIndex: 0,
+      focusTargetIndex: -1,
       // Замыкание из фокусируемых элементов окна
       focusClosure: [],
       // Метка окна
