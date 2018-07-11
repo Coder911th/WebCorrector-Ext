@@ -4,7 +4,7 @@
 -->
 <template>
   <div class="text-helper">
-    {{ text }}<QuestionMark
+    {{ text }}<Helper
         class="text-helper__tooltip"
         :text="tooltip"
         /><span v-if="textAfter" class="text-helper__colon">{{ textAfter }}</span>

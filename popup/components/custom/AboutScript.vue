@@ -98,7 +98,7 @@
               <Editor
                   ref="editor"
                   v-model="scriptCode"/>
-              <QuestionMark
+              <Helper
                   :text="'<b>Редактор кода</b><div style=&quot;margin-bottom: 5px&quot;>Нажмите ESC, чтобы выйти из режима редактирования.</div><div>Ctrl+Space - автодополнение.</div>'|lc"/>
             </div>
           </div>
