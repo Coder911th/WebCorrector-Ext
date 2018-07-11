@@ -119,7 +119,6 @@ export default {
     // Обработчик кнопки добавить библиотеку
     addLib(x) {
       if (this.validate()) {
-
         // Добавляем библиотеку в хранилище
         this.libs.push({
           alias: this.libAlias.trim(),
@@ -159,12 +158,11 @@ export default {
     // Обработчик сохранения библиотеки
     async onSaveLib(row, rowIndex) {
       let newLibAlias = row.children[1].textContent;
-      let newLibRUL = row.children[2].textContent;
+      let newLibURL = row.children[2].textContent;
       let scripts = this.$store.state.scripts;
       let oldLib = this.$store.state.libs[rowIndex];
 
       if (oldLib.url != newLibURL) {
-
         // Массив скриптов, зависящих от измененной библиотеки
         let needUpdateSK = scripts.filter(script => script.libs.some(lib => lib == oldLib.alias));
 

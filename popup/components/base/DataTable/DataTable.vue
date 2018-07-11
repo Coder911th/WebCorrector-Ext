@@ -7,7 +7,8 @@
           'data-table_to-top': sortField != null && sortDir,
           'data-table_to-bottom': sortField != null && !sortDir,
           'data-table_hover-highlight': hoverHighlight,
-          'data-table_editable': editable
+          'data-table_editable': editable,
+          'data-table_editing': editing
         }
       ]">
     <!-- Заголовок таблицы -->
@@ -36,7 +37,12 @@
       <div
           v-for="row of sortedRows"
           :key="row[keyField]"
-          class="data-table__row">
+          :class="['data-table__row',
+            {
+              'data-table__row_focused': row[keyField] == focusedRowKey,
+              'data-table__editing-target': row[keyField] === editingRowKey
+            }
+          ]">
         <!-- Элементы управления строкой -->
         <div
             v-if="editable"
@@ -48,28 +54,36 @@
               icon="icon-pencil"
               color="rgb(48, 74, 187)"
               size="1.1em"
-              @click="edit"/>
+              @click="edit"
+              @focus="focusedRowKey = row[keyField]"
+              @blur="focusedRowKey = null"/>
           <!-- Удаление -->
           <IconButton
               v-if="!editing"
               icon="icon-trash-empty"
               color="rgb(211, 36, 36)"
               size="1.1em"
-              @click="remove"/>
+              @click="remove"
+              @focus="focusedRowKey = row[keyField]"
+              @blur="focusedRowKey = null"/>
           <!-- Сохранение -->
           <IconButton
-              v-if="editing"
+              v-if="editing && row[keyField] === editingRowKey"
               icon="icon-floppy"
               color="#1842a5"
               size="1.32em"
-              @click="save"/>
+              @click="save"
+              @focus="focusedRowKey = row[keyField]"
+              @blur="focusedRowKey = null"/>
           <!-- Отмена -->
           <IconButton
-              v-if="editing"
+              v-if="editing && row[keyField] === editingRowKey"
               icon="icon-forward"
               color="rgb(211, 36, 36)"
               size="1.1em"
-              @click="rollback"/>
+              @click="rollback"
+              @focus="focusedRowKey = row[keyField]"
+              @blur="focusedRowKey = null"/>
         </div>
         <!-- Ячейки таблицы -->
         <div

@@ -43,6 +43,7 @@ $header-border: rgb(230, 230, 230);
 
 // Редактируемые таблицы
 .data-table_editable {
+  .data-table__row_focused,
   .data-table__row:hover {
     .data-table__cell {
       border-bottom: 1px solid $header-border;

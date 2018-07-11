@@ -120,7 +120,9 @@ export default {
       // Флаг редактирования строки
       editing: false,
       // Значение ключевого поля редактируемой строки
-      editingRowKey: null
+      editingRowKey: null,
+      // Значение ключевого поля фокусируемой строки
+      focusedRowKey: null
     };
   },
   methods: {
@@ -165,10 +167,6 @@ export default {
     },
     edit(ev) {
       this.controlAction(ev, 'onEdit', (row, rowIndex) => {
-        // Включаем режим редактирование таблицы
-        this.$el.classList.add('data-table_editing');
-        // Помечаем редактируемую строку таблицы
-        row.classList.add('data-table__editing-target');
         // Включаем режим редактирования
         this.editing = true;
         // Запоминаем значение ключевого поля редактируемой строки
@@ -179,10 +177,8 @@ export default {
       this.controlAction(ev, 'onSave', (row, rowIndex) => {
         // Заканчиваем редактирование
         this.editing = false;
-        // Выключаем режим редактирования таблицы
-        this.$el.classList.remove('data-table_editing');
         // Снимаем с редактируемого ряда метку
-        row.classList.remove('data-table__editing-target');
+        this.editingRowKey = null;
         // Обновляем данные
         let rowObject = this.rows[rowIndex];
         Array.prototype.forEach.call(row.querySelectorAll(`.data-table__cell`), (cell, colIndex) => {
@@ -196,10 +192,8 @@ export default {
       let rowIndex = Array.prototype.indexOf.call(row.parentNode.children, row) - 1;
       // Заканчиваем редактирование
       this.editing = false;
-      // Выключаем режим редактирования таблицы
-      this.$el.classList.remove('data-table_editing');
       // Снимаем с редактируемого ряда метку
-      row.classList.remove('data-table__editing-target');
+      this.editingRowKey = null;
       // Откатываем данные
       let cells = Array.prototype.slice.call(row.children, 1);
       cells.forEach((cell, colIndex) =>
@@ -238,10 +232,6 @@ export default {
           ) * (this.sortDir ? 1 : -1)
         );
     }
-  },
-  create() {
-    // Кэшируем изображение при загрузке компонента
-    //new Image().src = require('Assets/images/DataTable/save.svg');
   },
   mounted() {
     this.$el.addEventListener('click', ev => {

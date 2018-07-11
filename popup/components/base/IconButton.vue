@@ -11,7 +11,8 @@
       @mouseout="isHover = false"
       @keydown.enter.space="isActive = true"
       @keyup.enter.space="click"
-      @blur="isActive = false">
+      @focus="$emit('focus')"
+      @blur="isActive = false; $emit('blur')">
     <div
         :class="[
           'icon-button__icon',
