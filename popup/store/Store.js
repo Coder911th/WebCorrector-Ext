@@ -39,9 +39,6 @@ async function getStore() {
       // Настройки для сохранения состояния окна //
       /////////////////////////////////////////////
   
-      // Просматриваемый скрипт в компоненте AboutScript
-      'aboutScriptTarget',
-  
       // Открыт ли спойлер в окне с информацией о скрипте
       'isOpenSpoiler',
   
@@ -57,6 +54,9 @@ async function getStore() {
       // Url библиотеки в настройках (поле ввода)
       'libURL',
       
+      // Просматриваемый скрипт в компоненте AboutScript
+      'aboutScriptTarget',
+
       /*** Поля редактируемого скрипта ***/
       'scriptActive',
       'scriptName',
@@ -68,7 +68,6 @@ async function getStore() {
       'filterFlags'
     ]),
     actions: {
-  
       // Создаёт новый скрипт и открывает окно его редактирования
       // В дополнение заполняет указанные в объекте init поля нового скрипта
       createScript({dispatch: action}, init={}) {
@@ -90,11 +89,16 @@ async function getStore() {
         setState('scriptSites', script.sites);
         setState('scriptLibs', Array.from(script.libs));
         setState('scriptCode', script.code);
+        if (!state.aboutScriptWindow) {
+          setState('initAboutScriptWindow');
+        }
+        state.aboutScriptWindow.activateWindow();
       },
 
       // Скрывает страницу с информацией о скрипте
       hideScriptInfo({state, commit: setState}) {
         setState('aboutScriptTarget', null);
+        this._vm.$mainWindow.activateWindow();
       },
 
       // Проверяет изменился ли скрипт (кромя состояния active)
@@ -109,7 +113,6 @@ async function getStore() {
   
       // Сохраняет скрипт
       async saveScript({state: {scripts}, commit: setState, dispatch: action}, {before, after}) {
-        
         // Обрезаем начальные и конечные пробелы в названии скрипта и маске сайтов
         after.name = after.name.trim();
         after.sites = after.sites.trim();
@@ -138,10 +141,8 @@ async function getStore() {
   
         // Обновляем ключ безопасности скрипта
         await action('updateSK', after);
-  
         // Вызываем мутацию изменения в хранилище скриптов
         setState('scripts', scripts);
-  
         // Обновляем информацию о наблюдаемом скрипте
         action('showScriptInfo', after);
         return true;
@@ -149,13 +150,10 @@ async function getStore() {
   
       // Обновляет ключ безопасности скрпита
       updateSK({state, commit: setState}, script) {
-
         // Обновляем ключ безопасности скрипта локально
         script.securityKey = state.nextSecurityKey;
-  
         // Вызываем мутацию scripts
         setState('scripts', state.scripts);
-  
         // Вызываем мутацию nextSecurityKey
         setState('nextSecurityKey', state.nextSecurityKey + 1);
       },
@@ -177,7 +175,9 @@ async function getStore() {
   // Добавляем глобальные состояния не привязанные к хранилищу расширения
   Object.assign(store.state, {
     // Адрес активной вкладки браузера
-    currentUrl: await getCurrentUrl()
+    currentUrl: await getCurrentUrl(),
+    // Окно с информацие о скрипте
+    aboutScriptWindow: null
   });
 
   // Добавляем мутации не привязанные к хранилищу расширения
@@ -185,6 +185,13 @@ async function getStore() {
     // У активной вкладки сменился URL-адрес
     changedUrl(state, url) {
       state.currentUrl = url;
+    },
+    // Открывает окно с информацией о скрипте
+    initAboutScriptWindow(state) {
+      state.aboutScriptWindow = this
+        ._vm
+        .$mainWindow
+        .openChildWindow('AboutScript');
     }
   });
 

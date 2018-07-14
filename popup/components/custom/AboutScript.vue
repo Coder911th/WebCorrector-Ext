@@ -13,12 +13,11 @@
     backspace - Закрыть окно
 -->
 <template>
-  <transition name="slide-from-right">
+  <transition name="slide-from-right" appear>
     <div
         v-if="script"
         ref="panel"
         class="about-script"
-        tabindex="0"
         @keydown.shift.83.prevent="press('save')"
         @keyup.shift.83="unpress('save')"
         @keydown.8.prevent="press('back')"
@@ -129,6 +128,7 @@
 
 <script>
 import Vue from 'vue';
+import Window from 'Base/Window';
 import {vModel} from 'JavaScript/VuexHelpers';
 import Editor from '@/Editor';
 import Popup from 'JavaScript/PopupManager';
@@ -138,12 +138,12 @@ import {escapeHTML} from 'JavaScript/Escape.js';
 
 export default {
   name: 'AboutScript',
+  extends: Window,
   components: {
     Editor
   },
   mixins: [Validation],
   computed: {
-    
     // Массив из всех библиотек {alias, url}
     libs() {
       return this.$store.state.libs;
@@ -185,7 +185,6 @@ export default {
     ]
   },
   methods: {
-
     // Валидатор поля, обязательного к заполнению
     required: Validators.required,
 
@@ -196,7 +195,7 @@ export default {
     unpress(target) {
       return this.$refs[target].click();
     },
-    
+
     // Переключает состояние библиотеки alias в текущем скрипте на value
     toggleLib(alias, value) {
       let libs = this.scriptLibs;
@@ -224,15 +223,12 @@ export default {
       };
 
       if (await this.action('wasChanges', payload)) {
-
         // Если было что-то отредактировано
         if (await Popup.confirm(lc('Данные были изменены'), lc('Вы уверены, что хотите отменить все сделанные изменения?'))) {
           if (this.script.active != this.scriptActive) {
-
             // Состояние скрипта сохраняется в любом случае
             this.action('toggleScriptActive', this.script);
           }
-
           // Скрываем окно редактирования скрипта
           this.action('hideScriptInfo');
         } else {
@@ -240,11 +236,9 @@ export default {
         }
       } else {
         if (this.script.active != this.scriptActive) {
-
           // Если было изменено только состояние скрипта (включен/выключен)
           this.action('toggleScriptActive', this.script);
         }
-
         // Скрываем окно редактирования скрипта
         this.action('hideScriptInfo');
       }
@@ -288,7 +282,6 @@ export default {
     async onRemove() {
       if (await Popup.confirm(lc('Удаление скрипта'), lc('Вы уверены, что хотите удалить скрипт?'))) {
         this.action('removeScript', this.scriptName);
-
         // Скрываем окно редактирования скрипта
         this.action('hideScriptInfo');
         Popup.alert(null, `${lc('Скрипт')} <b>${escapeHTML(this.scriptName)}</b> ${lc('успешно удалён')}!`);
@@ -347,6 +340,7 @@ export default {
 }
 
 .about-script__checkbox {
+  margin: 0 !important;
   display: flex !important;
   justify-content: center;
   align-items: center;

@@ -6,7 +6,9 @@
       :class="['text-box', {'text-box_has-border': hasBorder}]" 
       :placeholder="placeholder"
       :value="value"
-      @input="$emit('input', $event.target.value)">
+      @input="$emit('input', $event.target.value)"
+      @keydown.stop
+      @keyup.stop>
 </template>
 
 <script>

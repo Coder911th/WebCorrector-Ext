@@ -42,6 +42,12 @@ Object.assign(Vue.prototype, {
   // Инициализируем глобальное хранилище состояний приложения
   let store = await Store;
 
+  // Vuex-хранилище (для динамически создаваемых компонентов)
+  Vue.prototype.$store = store;
+
+  // Инициализация окон
+  store.state.aboutScriptTarget && store.setState('openAboutScriptWindow');
+
   // Обрабатываем сообщения от фоновой страницы браузера
   chrome.runtime.onMessage.addListener(function(message) {
     switch (message.type) {
@@ -58,8 +64,7 @@ Object.assign(Vue.prototype, {
   // Создаём корневой экземляр приложения
   new Vue({
     el: '#app',
-    render: h => h(App),
-    store
+    render: h => h(App)
   });
 })();
 

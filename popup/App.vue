@@ -5,7 +5,6 @@
     <Tabs
       v-model="activeTab"
       :items="tabs"/>
-    <AboutScript/>
   </div>
 </template>
 

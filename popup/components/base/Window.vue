@@ -3,7 +3,7 @@
 -->
 <script>
 import Vue from 'vue';
-import {vCreate} from 'JavaScript/VueHelpers';
+import {vCreate, getComponentConfig} from 'JavaScript/VueHelpers';
 import Window from 'Base/Window';
 
 // Активное окно
@@ -91,13 +91,17 @@ export default {
 
     // Делет текущее окно активным
     activateWindow(addFocusClass) {
-      if (activeWindow.focusTarget) {
+      if (activeWindow && activeWindow.focusTarget) {
         activeWindow.focusTarget.removeAttribute('focus');
       }
       if (!this.isActiveWindow()) {
-        activeWindow.$el.removeAttribute('active-window');
+        activeWindow && activeWindow.$el.nodeType == Node.ELEMENT_NODE &&
+          activeWindow.$el.removeAttribute('active-window');
         activeWindow = this;
-        this.$el.setAttribute('active-window', '');
+        this.$nextTick(() => {
+          this.$el.setAttribute('active-window', '');
+          this.$el.focus();
+        });
       }
       if (this.focusTarget) {
         addFocusClass && this.focusTarget.setAttribute('focus', '');
@@ -106,23 +110,19 @@ export default {
     },
 
     // Открывает дочернее окно
-    openChildWindow(name, props, addFocusClass) {
-      if (Vue.options.components[name].options.data().isWindow !== true)
-        return console.warn(`Попытка открыть дочернее окно "${name}", ` +
-          'которое не является экземпляром класса Window!');
-      
+    openChildWindow(name, props={}, addFocusClass) {
       let window = vCreate(name, Object.assign(props, {
         opener: this
       }));
-
       window.$nextTick(() => window.activateWindow(addFocusClass));
+      return window;
     }
   },
   mounted() {
     if (!activeWindow) {
-      activeWindow = this;
-      activeWindow.activateWindow();
+      this.activateWindow();
     }
+    this.$el.tabIndex = 0;
   },
   destroyed() {
     if (this.opener) {
@@ -131,3 +131,8 @@ export default {
   }
 }
 </script>
+<style>
+* {
+  outline: none;
+}
+</style>
